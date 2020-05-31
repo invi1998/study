@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>jquery左右滑动效果的实现</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#bta").click(function () {
+                $("#unit").css("left", "300px");
+                document.getElementById("unit").style.left = "300px";
+                //                var container = document.getElementById("unit");
+                //                try {
+                //                    container.insertBefore(container.lastChild, container.firstChild)
+                //                }
+                //                catch (e) { alert(e); }
+                $("#unit").prepend($("#unit>div:last"));
+                $("#unit").animate({ "left": 0 }, 500);
+                //$("#unit").stop(true, false).animate({ "left": 0 }, 500); 
+
+            });
+            $("#btb").click(function () {
+                $("#unit").animate({ "left": -300 }, 500);
+                //$("#unit").stop(true, false).animate({ "left": -300 }, 500);
+
+                function gundong() {
+                    $("#unit").css("left", "0px");
+                    //document.getElementById("unit").style.left = "0px";
+                    $("#unit").append($("#unit>div:first"));
+                    //                                        var container = document.getElementById("unit");
+                    //                                        try {
+                    //                                            container.appendChild(container.firstChild);
+                    //                                        }
+                    //                                        catch (e) { alert(e); }
+                }//等待动画滚动后执行
+                setTimeout(function () { gundong() }, 700);
+            })
+        });
+
+    </script>
+    <style type="text/css">
+        *
+        {
+            padding: 0;
+            margin: 0;
+        }
+        #box
+        {
+            width: 300px;
+            height: 150px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        #unit
+        {
+            width: 1200px;
+            position: absolute;
+        }
+        #unit div
+        {
+            float: left;
+            width: 300px;
+            height: 150px;
+        }
+        #bga
+        {
+            background-color: #F30;
+        }
+        #bgb
+        {
+            background-color: #F90;
+        }
+        #bta, #btb
+        {
+            float: left;
+            width: 50px;
+            padding-right: 50px;
+            color: #FFF;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 800px; height: 300px; padding-top: 100px; background-color: #999;
+        margin: 0 auto;">
+        <div id="box">
+            <div id="unit">
+                <div id="bga">
+                    框一</div>
+                <div id="bgb">
+                    框二</div>
+                <div id="bgc">
+                    框三</div>
+                <div id="bgd">
+                    框四</div>
+            </div>
+        </div>
+        <div id="bta">
+            左</div>
+        <div id="btb">
+            右</div>
+    </div>
+</body>
+</html>

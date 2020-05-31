@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            position: relative;
+            width: 400px;
+            border-bottom: 1px solid #ccc;
+            margin: 100px auto;
+        }
+        .box input{
+            width: 368px;
+            height: 32px;
+            border: 0;
+            outline: none;
+        }
+        .box img{
+            position: absolute;
+            top: 6px;
+            right: 2px;
+            width: 20px;
+        }
+        .box2{
+            position: relative;
+            width: 300px;
+            margin: 100px auto;
+        }
+        .box2 li{
+            float: left;
+            width:48px;
+            height: 48px;
+            margin: 2px;
+            background: url(/png/2019.png) no-repeat;
+            list-style-type:none;
+        }
+        .box3{
+            position: relative;
+            width: 500px;
+            margin: 400px auto;
+            text-align: center;
+        }
+        .box3 > table{
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        table>thead{
+            background: rgb(9, 162, 209);
+        }
+        td{
+            /* cursor: pointer; */
+            padding: 0;
+            color: rgb(49, 49, 49);
+            background: rgb(236, 235, 235);
+        }
+        #shang{
+            padding: 0;
+            color: rgb(255, 255, 255);
+            width: 200px;
+        }
+        #jia{
+            padding: 0;
+            color: rgb(255, 255, 255);
+            width: 200px;
+        }
+        #select_all{
+            /* cursor: pointer; */
+            width: 20px;
+            height: 20px;
+        }
+        input[type="checkbox"]{
+            cursor: pointer;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <label for="">
+            <img src="/png/yanjing-bi.png" alt="" id="eye">
+        </label>
+        <input type="password" name="" id="psw">
+    </div>
+    <div class="box2">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="box3">
+        <table>
+            <thead>
+               <tr>
+                    <th>
+                        <input type="checkbox" id="select_all"/>
+                    </th>
+                    <th id="shang">商品</th>
+                    <th id="jia">价格</th>
+                </tr> 
+            </thead>
+            <tbody id="t_body">
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>iphone8</td>
+                    <td>8000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>iphonex</td>
+                    <td>10000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>iphonex max</td>
+                    <td>12000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>mac pro</td>
+                    <td>22000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        var eye=document.getElementById('eye');
+        var psw=document.getElementById('psw');
+        var flag=true;
+        eye.onclick=function(){
+            if(flag==true){
+                psw.type='text';
+                eye.src='/png/yanjing-shi.png';
+                flag=false;
+                return;
+            }
+            else{
+                psw.type='password';
+                eye.src='/png/yanjing-bi.png';
+                flag=true;
+                return;
+            }
+        }
+        var lis=document.querySelectorAll('li');
+        for(var i=0;i<lis.length;i++){
+            var y=i*(-48);
+            var stringP='0'+' '+y.toString()+'px';
+            lis[i].style.backgroundPosition=stringP;
+        }
+        //全选和取消全选
+        var select_all=document.getElementById('select_all');
+        var single_select=document.getElementById('t_body').getElementsByTagName('input');
+        select_all.onclick=function() {
+            for(var i=0;i<single_select.length;i++){
+                single_select[i].checked=this.checked;
+            }
+        }
+        for(var i=0;i<single_select.length;i++){
+            single_select[i].onclick=function(){
+                var flag=true;
+                for(var s=0;s<single_select.length;s++){
+                    if(!single_select[s].checked){
+                        flag=false;
+                        break;
+                    }
+                }
+                select_all.checked=flag;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!-- 
+    在留言板案例的基础上添加功能
+当把文本域的内容幅值给 li 的时候，多添加一个删除的链接，
+循环把所有的链接获取过来，当我们点击一个链接的时候，删除当前链接所在的 li
+阻止链接跳转需要添加javascript:void(0);或者 javascript:;
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul li{
+            list-style-type: none;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: relative;
+            text-align: center;
+        }
+        #texta{
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            margin-bottom: 0;
+            display: inline-block;
+            border: 10px solid rgb(0, 136, 118);
+            color: rgb(255, 242, 219);
+            background-color: rgb(0, 85, 81);
+        }
+        #btu{
+            width: 50px;
+            margin: 20px auto;
+            display: block;
+        }
+        .box>ul{
+            display: block;
+            margin: 0 auto;
+            width: 400px;
+            height: 600px;
+            color: aliceblue;
+            text-align: left;
+            background-color: rgb(0, 136, 118);
+        }
+        .box>ul>li{
+            margin: 10px auto;
+            background-color: rgba(240, 248, 255, 0.2);
+            height: auto;
+            width: 360px;
+            max-height: 200px;
+            padding: 5px 40px;
+            /* padding-left: 40px;
+            padding-right: 40px; */
+        }
+        li a{
+            text-decoration: none;
+            color: rgb(238, 39, 39);
+            float: right;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <textarea name="" id="texta"></textarea>
+        <button id="btu">发布</button>
+        <ul>
+        </ul>
+    </div>
+    <script>
+        var btn=document.querySelector('#btu');
+        var text=document.querySelector('textarea');
+        var ul=document.querySelector('ul');
+        btu.onclick=function(){
+            if(text.value==''){
+                alert('请输入文本');
+                return;
+            }
+            else{
+                var li=document.createElement('li');
+                li.innerHTML=text.value+"<a href='javascript:;'>删除</a>"; //除了添加文本，同时还附带一个删除的连接，实现删除留言的作用。
+                //ul.appendChild(li);href里面写javascript:;或者javascript：void(0);作用，阻止连接跳转。
+                ul.insertBefore(li,ul.children[0]);
+                //删除元素，删除当前连接的li
+                var as=document.querySelectorAll('a');
+                for(var i=0;i<as.length;i++){
+                    as[i].onclick=function(){
+                        ul.removeChild(this.parentNode);//node.removeChild(child; 删除的li 是当前a所在的li 即this.parentNode;然后该li的父亲结点是ul，所以找到ul去删除子节点li即可
+                    }
+                }
+            }  
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <img src="/png/gifgou.gif" alt="洗澡狗">
+    <script>
+        var img=document.querySelector('img');
+        document.addEventListener('mousemove',function(e){
+            var x=e.pageX-25;
+            var y=e.pageY-25;
+            img.style.left=x+'px';
+            img.style.top=y+'px';
+        })
+    </script>
+</body>
+</html>

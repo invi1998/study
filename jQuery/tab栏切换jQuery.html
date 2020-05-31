@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/jQuery/jQuery.mini.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul li {
+        list-style-type: none;
+    }
+
+    .tab {
+        width: 700px;
+        margin: 100px auto;
+    }
+
+    .tab .tab_list {
+        height: 30px;
+        position: relative;
+        border-bottom: 2px solid rgb(146, 28, 7);
+        text-align: center;
+        line-height: 30px;
+        background: rgb(228, 228, 228);
+    }
+
+    .tab_list li {
+        width: 130px;
+        height: 30px;
+        float: left;
+        cursor: pointer;
+    }
+
+    .current {
+        background: rgb(146, 28, 7);
+        color: azure;
+    }
+
+    .item {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后与保障</li>
+                <li>商品评价</li>
+                <li>手机社区</li>
+            </ul>
+        </div>
+        <div class="tab_con">
+            <div class="item" style="display: block">
+                商品介绍模块内容Lorem ipsum dolor sit amet.
+            </div>
+            <div class="item">
+                规格与包装Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero.
+            </div>
+            <div class="item">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium corrupti eveniet praesentium
+                tenetur neque quasi officiis ducimus doloribus. Dignissimos, neque.lorem12 Lorem ipsum dolor sit amet
+                consectetur, adipisicing elit. Placeat neque repudiandae debitis cumque magnam.
+            </div>
+            <div class="item">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique soluta, nulla at facilis libero
+                molestiae. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem temporibus dolor voluptates
+                nostrum repellat asperiores in veniam architecto alias maxime.
+            </div>
+            <div class="item">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Id, iure! Dicta dolor quod totam?
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $(".tab_list li").click(function(){
+                $(this).addClass("current").siblings().removeClass("current");
+                var index=$(this).index();
+                $(".tab_con .item").eq(index).show().siblings().hide();
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Dosis|Ma+Shan+Zheng|ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            color: rgb(39, 39, 39);
+            text-decoration:none;
+        }
+        .login-header{
+            position: relative;
+            height: 50px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .login-header>a{
+            border-radius: 10px;
+            padding: 5px;
+            height: 30px;
+            box-shadow: 6px 3px 15px rgba(39, 39, 39, 0.5);
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 25px;
+        }
+        .login{
+            position: absolute;
+            display: none;
+            width: 450px;
+            height: 200px;
+            margin: 10px auto;
+            text-align: center;
+            border: 1px solid rgb(39, 39, 39);
+            border-top: 2px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 30px;
+            box-shadow: 6px 3px 15px rgba(255, 255, 255, 0.5);
+            z-index: 9999;
+            transform: translate(100%,50%);
+        }
+        .login-title{
+            cursor: move;
+            height:30px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.04);
+            border-radius: 30px 30px 0 0;
+            /* border-top: 2px solid  rgb(39, 39, 39); */
+            font-size: 20px;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        .login-title a{
+            width: 24px;
+            height: 24px;
+            float: right;
+            font-size: 10px;
+            border-radius: 12px;
+            background-color: rgb(32, 32, 32);
+            line-height: 24px;
+            color: aliceblue;
+        }
+        .login-input-content{
+            width: 450px;
+            height: 100px;
+            padding: 10px 0 0 0;
+        }
+        .login-input{
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            font-size: 12px;
+            float: right;
+            margin-right: 50px;
+        }
+        .login-input label{
+            font-size: 13px;
+            width: 200px;
+        }
+        .login-input input{
+            background-color: transparent;
+            outline:0;
+            width: 250px;
+            font-size: 13px;
+            border: 0;
+            border-bottom:1px solid rgb(32, 32, 32);
+            padding-left: 5px;
+        }
+        .login-button{
+            width:60px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid rgb(32, 32, 32);
+            float: right;
+            margin-right: 20px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor:pointer;
+        }
+        .login-bg{
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-header"><a id="link" href="javascript:;">登录/login</a></div>
+    <div id="login" class="login">
+        <div id="title" class="login-title">欢迎登录
+            <span><a id="closeBtn" href="javascript:;" class="close-login">退出</a></span>
+        </div>
+        <div class="login-input-content">
+            <div class="login-input">
+                <label>用户名：</label>
+                <input type="text" placeholder="请输入用户名" name="info[username]" id="username" class="username">
+            </div>
+            <div class="login-input">
+                <label>登录密码：</label>
+                <input type="password" placeholder="请输入密码" name="info[password]" id="password" class="password">
+            </div>
+        </div>
+        <div id="loginBtn" class="login-button"><a href="javascript:;" id="login-button-submit" class="submit">login</a></div>
+    </div>
+    <!-- 遮罩层 -->
+    <div class="login-bg" id="bg"></div>
+    <script>
+        var login=document.querySelector('.login');
+        var mask=document.querySelector('.login-bg');
+        var close=document.querySelector('#closeBtn');
+        var link=document.querySelector('#link');
+        var title=document.querySelector('#title');
+
+        link.addEventListener('click',function(){
+            mask.style.display='block';
+            login.style.display='block';
+        })
+        close.addEventListener('click',function(){
+            login.style.display='none';
+             mask.style.display='none';
+        })
+        title.addEventListener('mousedown',function(e){
+            var x=e.pageX-login.offsetLeft;
+            var y=e.pageY-login.offsetTop;
+            document.addEventListener('mousemove',move)
+            function move(e){
+                login.style.left=e.pageX-x+'px';
+                login.style.top=e.pageY-y+'px';
+            }
+            document.addEventListener('mouseup',function(){
+                document.removeEventListener('mousemove',move)
+            })
+        })
+    </script>
+</body>
+</html>

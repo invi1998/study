@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul li{
+            list-style: none;
+        }
+
+        .container {
+            height: 154px;
+            background: rgb(36, 43, 29);
+            margin: 0 auto;
+            color: rgb(236, 236, 236);
+        }
+
+        .container ul li{
+            float: left;
+            width: 97.75px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        /* 超小屏幕（手机，小于768px的）：设置宽度为100%
+            小屏幕（平板，大于等于768px的）：设置为750px;
+            中等屏幕（桌面显示屏，大于等于992px的）：设置为970px
+            大屏幕（大屏桌面，大于等于1200px的）：设置为1170px. */
+        @media screen and (max-width: 767px) {
+            .container {
+                width: 100%;
+            }
+            .container ul li{
+                width: 33.33%;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li>导航栏</li>
+            <li>导航栏</li>
+            <li>导航栏</li>
+            <li>导航栏</li>
+            <li>导航栏</li>
+            <li>导航栏</li>
+            <li>导航栏</li>
+            <li>导航栏</li>
+        </ul>
+    </div>
+</body>
+
+</html>

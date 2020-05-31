@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/reg.js"></script>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1388484_0j57xk2i42ds.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,ol li{
+            list-style: none;
+        }
+        .header{
+            margin: 10px auto;
+            margin-bottom: 0;
+            width: 90%;
+            height: 110px;
+            border-bottom: 5px solid rgb(6, 58, 78);
+        }
+        .header .logo a{
+            width: 100px;
+            height: 100px;
+        }
+        .logo img{
+            width: 100px;
+            height: 100px;
+        }
+        .registered-box{
+            margin: 5px auto;
+            width: 670px;
+            height: 500px;
+            border: 2px solid rgba(6, 58, 78, 0.3);
+            font-size: 12px;
+            text-align: center;
+        }
+        .registered-header{
+            height: 30px;
+            width: 100%;
+            background-color: rgba(6, 58, 78, 0.3);
+            text-align: center;
+        }
+        .registered-header span{
+            line-height: 30px;
+            font-size: 12px;
+            margin: 0 5px;
+        }
+        .registered-header .new-registered{
+            float: left;
+        }
+        .registered-header .login{
+            float: right;
+        }
+        .registered-form{
+            width: 100%;
+            height: 300px;
+            margin-top: 10px;
+            position: relative;
+        }
+        .registered-form form ul{
+            width: 100%;
+            height: 100%;
+            margin-top: 20px;
+            position: absolute;
+        }
+        .registered-form form ul li{
+            display: block;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            margin: 20px auto;
+        }
+        form ul li label{
+            width: 180px;
+            text-align: end;
+            position: absolute;
+            left: 50px;
+            vertical-align: middle;
+        }
+        form ul li input{
+            height: 20px;
+            width: 200px;
+            position: absolute;
+            left: 250px;
+            vertical-align: middle;
+        }
+        form ul li span{
+            font-size: 10px;
+            width: 225px;
+            text-align: start;
+            display: none;
+            position: absolute;
+            left: 460px;
+            vertical-align: middle;
+        }
+        .registered-form ul li .front{
+            text-align: end;
+        }
+        input{
+            font-size: 12px;
+        }
+        button{
+            margin: 10px auto;
+            width: 100px;
+            height: 30px;
+            background-color: rgb(167, 7, 73);
+            border: 0;
+            color: white;
+            font-weight: bolder;
+            top: -30px;
+        }
+        form ul li.Safety{
+            display: block;
+            margin: 0;
+        }
+        form ul li.Safety span{
+            display: block;
+            position: absolute;
+            text-align: center;
+        }
+        .level{
+            left: 150px;
+        }
+        .low{
+            width: 50px;
+            left: 300px;
+            color: white;
+            background-color: rgb(196, 0, 33);
+        }
+        .mid{
+            width: 50px;
+            left: 350px;
+            color: white;
+            background-color: rgb(214, 86, 0);
+        }
+        .hig{
+            width: 50px;
+            left: 400px;
+            color: white;
+            background-color: rgb(7, 167, 20);
+        }
+        i{
+            font-size: 16px;
+            line-height: 25px;
+            text-align: center;
+            margin: 5px;
+            vertical-align: middle;
+        }
+        .registered-foot{
+            margin-top: 10px;
+            position: relative;
+            top: 20px;
+        }
+        .protocol{
+            margin: 30px auto;
+            line-height: 25px;
+        }
+        .protocol span{
+            vertical-align: middle;
+        }
+        .protocol input{
+            vertical-align: middle;
+            margin: 5px;
+        }
+        .error{
+            display: block;
+            color: rgb(196, 0, 33);
+        }
+        .success{
+            display: block;
+            color: rgb(0, 207, 138);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="w">
+        <!-- header -->
+        <div class="header">
+            <div class="logo">
+                <a href="/表单验证.html">
+                    <img src="/png/logo.png" alt="">
+                </a>
+            </div>
+        </div>
+        <!-- body -->
+        <div class="registered-box">
+            <div class="registered-header">
+                <span class="new-registered">注册新用户</span><span class="login">我有账号，去<a href="">登录</a></span>
+            </div>
+            <div class="registered-form">
+                <form action="/demo.php">
+                    <ul>
+                        <li>
+                            <label for="tel" class="front">手机号：</label>
+                            <input type="text" class="inp" id="tel">
+                            <span class=""><i class="iconfont icon-Icon-cuowu-"></i>手机号码格式不正确，请重新输入</span>
+                        </li>
+                        <li>
+                            <label for="qq" class="front">QQ：</label>
+                            <input type="text" class="inp" id="qq">
+                            <span class=""><i class="iconfont icon-Icon-cuowu-"></i>QQ号码格式不正确，请重新输入</span>
+                        </li>
+                        <li>
+                            <label for="nic" class="front">昵称：</label>
+                            <input type="text" class="inp" id="nic">
+                            <span class=""><i class="iconfont icon-Icon-cuowu-"></i>码格式不正确，请重新输入</span>
+                        </li>
+                        <li>
+                            <label for="mes" class="front">短信验证码：</label>
+                            <input type="text" class="inp" id="mes">
+                            <span class=""><i class="iconfont icon-Icon-cuowu-"></i>请在10秒后重新获取</span>
+                        </li>
+                         <li>
+                            <label for="psd" class="front">登录密码：</label>
+                            <input type="password" class="inp" id="psd">
+                            <span class=" "><i class="iconfont icon-Icon-cuowu-"></i>密码等级须达到高级，请重新输入</span>
+                        </li>
+                        <li class="Safety">
+                            <span class="level">安全等级--</span><span class="low">弱</span><span class="mid">中</span><span class="hig">强</span>
+                        </li>
+                         <li>
+                            <label for="repsd" class="front">确认密码：</label>
+                            <input type="password" class="inp" id="repsd">
+                            <span class=" "><i class="iconfont icon-Icon-cuowu-"></i>2次密码不匹配，请重新输入</span>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="registered-foot">
+                <div class="protocol">
+                    <input type="checkbox"><span>同意用户协议并注册</span><span><a href="/JavaScript学习笔记.txt">《JavaScript学习笔记》</a></span>
+                </div>
+                <button>完成注册</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

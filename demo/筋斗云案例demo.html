@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/animate.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul li{
+            list-style-type: none;
+        }
+        a{
+            color: rgb(109, 109, 109);
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .nav{
+            left: 30%;
+            width: 500px;
+            height: 30px;
+            position: absolute;
+            margin: 100px auto;
+            border-bottom: 1px solid rgba(59, 59, 59, 0.2);
+            /* box-shadow: 1px 1px 5px rgba(41, 41, 41, 0.3); */
+        }
+        .cloud{
+            top: 0;
+            left: 0;
+            display: inline-block;
+            /* background: url(/png/叶子5.png) no-repeat; */
+            background-color: rgba(83, 83, 83, 0.5);
+            background-size:100% 100%;
+            position: relative;
+            height: 30px;
+            width: 60px;
+            border-radius: 15px;
+            /* box-shadow: 3px -3px 4px rgba(0, 0, 0, 0.6); */
+            line-height: 30px;
+        }
+        .nav ul{
+            background-color: transparent;
+            z-index: 2;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            line-height: 30px;
+            text-align: center;
+            top: -34px;
+        }
+        ul li{
+            background-color: transparent;
+            width: 12%;
+            height: 100%;
+            float: left;
+            line-height:30px;
+        }
+        .current a{
+            color: white;
+            font-size: 13px;
+        }
+        .currentdown{
+            border-radius: 15px;
+            /* box-shadow: -2px 2px 5px rgba(77, 77, 77, 0.637); */
+            background-color: rgb(99, 99, 99);
+            line-height: 30px;
+        }
+        .currentdown a{
+            color: rgb(255, 255, 255);
+            font-size: 13px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav" id="nav">
+        <span class="cloud"></span>
+        <ul>
+            <li><a href="#">首页新闻</a></li>
+            <li><a href="#">师资力量</a></li>
+            <li><a href="#">活动策划</a></li>
+            <li><a href="#">企业文化</a></li>
+            <li><a href="#">招聘信息</a></li>
+            <li><a href="#">公司简介</a></li>
+            <li><a href="#">游戏中心</a></li>
+            <li><a href="#">会员购物</a></li>
+        </ul>
+    </div>
+    <script>
+        var cloud=document.querySelector('.cloud');
+        var nav=document.querySelector('.nav');
+        var lis=document.querySelectorAll('li');
+        var currentX=0;//起始位置
+        for(var i=0;i<lis.length;i++){
+            lis[0].className='currentdown'
+            lis[i].setAttribute('flag','true');
+            lis[0].flag='false';
+            lis[i].addEventListener('mouseenter',function(){
+                animate(cloud,this.offsetLeft);
+                if(this.flag=='false'){
+                    this.className='currentdown';
+                }else{
+                    this.className='current'; 
+                }
+            })
+            lis[i].addEventListener('mouseleave',function(){
+                animate(cloud,currentX);
+                if(this.flag=='false'){
+                    this.className='currentdown';
+                }else{
+                    this.className=''; 
+                }
+            })
+            lis[i].addEventListener('click',function(){
+                for(var i=0;i<lis.length;i++){
+                    lis[i].flag='true';
+                }
+                this.flag='false';
+                currentX=this.offsetLeft;
+                for(var i=0;i<lis.length;i++){
+                    lis[i].className='';
+                }
+                this.className='currentdown';
+            })
+        }
+    </script>
+</body>
+</html>

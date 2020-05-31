@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>点击</button>
+    <script>
+        var button;
+        class Star {
+            //constructor里面的this指向的是创建的实例对象
+            constructor(uname, age) {
+                button = this;
+                this.uname = uname;
+                this.age = age;
+                this.btu = document.querySelector('button');
+                this.btu.onclick = this.sing;     //注意这里调用函数，不要加小括号，因为加了小括号就标志立即调用sing方法。
+            }
+            //（方法）函数的this指向的是这个（方法）函数的调用者
+            sing() {
+                alert(this.uname);      //这种写法返回的是Undefind，因为这里的this指向的函数的调用者，上面的btu,btu是没有这个属性（uname）的，所以undefined。
+                alert(button.uname);    //将该类的this指向外面声明的变量button之后，button就有了star的所有属性和方法，就可以调用该方法了
+            }
+        }
+        var ldh = new Star('刘德华', 25);
+    </script>
+</body>
+
+</html>

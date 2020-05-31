@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container{
+            width:100px;
+            height: 111px;
+            border:0px solid rgb(62, 61, 75);
+            background: url(../png/序列帧.jpg) no-repeat;
+            animation: run 1s infinite; 
+            animation-timing-function: steps(1);/*这里设置的steps是作用于关键帧之间有几个动画过度，设置为1了以后就表示不需要系统为我们设置过度，就只显示我们自己的关键帧动画就可以*/
+        }
+        @keyframes run{
+            0%{
+                background-position: 0 0;
+            }
+            6.6%{
+                background-position: -100px 0;
+            }
+            13.2%{
+                background-position: -200px 0;
+            }
+            19.8%{
+                background-position: -300px 0;
+            }
+            26.4%{
+                background-position: -400px 0;
+            }
+            33%{
+                background-position: 0 -111px;
+            }
+            39.6%{
+                background-position: -100px -111px;
+            }
+            46.2%{
+                background-position: -200px -111px;
+            }
+            52.8%{
+                background-position: -300px -111px;
+            }
+            59.4%{
+                background-position: -400px -111px;
+            }
+            66%{
+                background-position: 0 -222px;
+            }
+            72.6%{
+                background-position: -100px -222px;
+            }
+            79.2%{
+                background-position: -200px -222px;
+            }
+            85.8%{
+                background-position: -300px -222px;
+            }
+            92.4%{
+                background-position: -400px -222px;
+            }
+            100%{
+                background-position: 0 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+    </div>
+</body>
+</html>

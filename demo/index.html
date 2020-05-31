@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #uname{
+            color: brown;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    欢迎你：<p id="uname"></p>
+</body>
+    <script>
+        var uname=document.querySelector('p');
+        var login_name=location.search.substr(1);//利用substr(参数1：开始截取字符串的下标位置，参数2：截取字符串的长度（省略就默认截取到最后）)来截取？后面的字符串uname=andy
+        uname.innerHTML=login_name.split('=')[1];//利用split('=')；来对字符串uname=andy进行拆分成一个数组["uname","andy"],所以[1]就是该用户名。
+    </script>
+</html>

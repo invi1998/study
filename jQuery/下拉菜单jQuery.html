@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/jQuery/jQuery.mini.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            font-size: 12px;
+            color: rgb(39, 39, 39);
+            text-decoration: none;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        .nav {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        .nav>li {
+            text-align: center;
+            position: relative;
+            margin: 10px auto;
+            height: 30px;
+            width: 100px;
+            float: left;
+            color: black;
+            background: rgb(0, 79, 116);
+            line-height: 30px;
+        }
+
+        .nav>li>a {
+            font-size: 14px;
+            color: rgb(255, 255, 255);
+        }
+
+        .nav>li>a:hover {
+            background-color: rgba(0, 0, 0, 0.089);
+        }
+
+        .nav ul {
+            display: none;
+            width: 100%;
+            background-color: rgb(235, 251, 255);
+        }
+
+        .nav>li>ul>li:hover {
+            animation: right_move 0.2s linear;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes right_move {
+            form {
+                padding-left: 0;
+                background-color: rgba(0, 73, 141, 0);
+            }
+
+            to {
+                padding-left: 20px;
+                background-color: rgba(0, 73, 141, 0.5);
+            }
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav">
+        <li>
+            <a href="#">微博</a>
+            <ul>
+                <li>
+                    <a href="">私信</a>
+                </li>
+                <li>
+                    <a href="">评论你</a>
+                </li>
+                <li>
+                    <a href="">@我</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">相册</a>
+            <ul>
+                <li>
+                    <a href="">风景</a>
+                </li>
+                <li>
+                    <a href="">海报</a>
+                </li>
+                <li>
+                    <a href="">喜欢</a>
+                </li>
+                <li>
+                    <a href="">留言</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">动态</a>
+            <ul>
+                <li>
+                    <a href="">上传</a>
+                </li>
+                <li>
+                    <a href="">下载</a>
+                </li>
+                <li>
+                    <a href="">浏览</a>
+                </li>
+                <li>
+                    <a href="">活跃</a>
+                </li>
+                <li>
+                    <a href="">僵尸粉</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">关于</a>
+            <ul>
+                <li>
+                    <a href="">姓名</a>
+                </li>
+                <li>
+                    <a href="">资料</a>
+                </li>
+                <li>
+                    <a href="">地址</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $(function(){
+            //1 写法1
+            // $(".nav>li").mouseenter(function () { 
+            //     $(this).children('ul').slideDown();
+            // });
+            // $('.nav>li').mouseleave(function(){
+            //     $(this).children('ul').slideUp();
+            // })
+            //写法2 事件切换hover就是鼠标经过和离开的复合写法
+            // $(".nav>li").hover(function(){
+            //     $(this).children('ul').slideDown();
+            // },function(){
+            //     $(this).children('ul').slideUp();
+            // })
+            //写法3 如果只有一个函数，那么鼠标经过和离开都会触发这个函数
+            $(".nav>li").hover(function(){
+                $(this).children('ul').stop().slideToggle();
+            })
+        })
+    </script>
+</body>
+
+</html>

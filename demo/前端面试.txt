@@ -1,0 +1,655 @@
+在html中通过<a>标签打开一个链接，通过 <a> 标签的 target 属性规定在何处打开链接文档。
+如果在标签<a>中写入target属性，则浏览器会根据target的属性值去打开与其命名或名称相符的 框架<frame>或者窗口.
+在target中还存在四个保留的属性值如下，
+属性值
+    值	        描述
+    _blank	    在新窗口中打开被链接文档。
+    _self	    默认。在相同的框架中打开被链接文档。
+    _parent	    在父框架集中打开被链接文档。
+    _top	    在整个窗口中打开被链接文档。
+    framename	在指定的框架中打开被链接文档。
+这些 target 的所有 4 个值都以下划线开始。任何其他用一个下划线作为开头的窗口或者目标都会被浏览器忽略，因此，不要将下划线作为文档中定义的任何框架 name 或 id 的第一个字符。
+
+flash和js通过什么类如何交互?
+    Flash提供了ExternalInterface接口与JavaScript通信，ExternalInterface有两个方法，call和addCallback：
+    ExternalInterface.addCallback("在js里可调用的flash方法名",flash内方法) //在flash中通过这个方法公开 在js中可调用的flash内的方法;
+    ExternalInterface.call("js方法",传给js的参数) //在flash里调用js里的方法
+
+下面有关html5标签说法错误的有？
+    错误：
+    <canvas> 比如来自一个外部的新闻提供者的一篇新的文章，或者来自 blog 的文本，或者是来自论坛的文本。亦或是来自其他外部源内容
+    正确
+    <audio> 标签定义声音，比如音乐或其他音频流
+    <menu> 标签定义菜单列表。当希望列出表单控件时使用该标签
+    <command> 标签定义命令按钮，比如单选按钮、复选框或按钮
+    解析
+    <audio> 标签定义声音，比如音乐或其他音频流。 A正确。
+    <canvas> 标签定义图形，比如图表和其他图像。<canvas> 标签只是图形容器，您必须使用脚本来绘制图形。 B错误，（写成了其他标签的功能了）。
+    <article>标签定义外部的内容。比如来自一个外部的新闻提供者的一篇新的文章，或者来自 blog 的文本，或者是来自论坛的文本。亦或是来自其他外部源内容。
+    <menu> 标签定义命令的列表或菜单。<menu> 标签用于上下文菜单、工具栏以及用于列出表单控件和命令。 C正确。
+    command 元素表示用户能够调用的命令。<command> 标签可以定义命令按钮，比如单选按钮、复选框或按钮。只有当 command 元素位于 menu 元素内时，该元素才是可见的。否则不会显示这个元素，但是可以用它规定键盘快捷键。 D正确。
+
+浏览器中使用js跨域获取数据：
+    1.CORS
+        CORS（Corss-Origin Resource Sharing,跨资源共享），基本思想是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应的成功或失败。即给请求附加一个额外的Origin头部，其中包含请求页面的源信息（协议、域名和端口），以便服务器根据这个头部决定是否给予响应。
+    2.document.domain
+        将页面的document.domain设置为相同的值，页面间可以互相访问对方的JavaScript对象。
+        注意：
+            不能将值设置为URL中不包含的域；
+            松散的域名不能再设置为紧绷的域名。
+    3.图像Ping
+        var img=new Image();
+        img.onload=img.onerror=function(){
+        ... ...
+        }
+        img.src="url?name=value";
+        请求数据通过查询字符串的形式发送，响应可以是任意内容，通常是像素图或204响应。
+        图像Ping最常用于跟踪用户点击页面或动态广告曝光次数。
+        缺点：
+            只能发送GET请求；
+            无法访问服务器的响应文本，只能用于浏览器与服务器间的单向通信。
+    4.Jsonp
+        var script=document.createElement("script");
+        script.src="url?callback=handleResponse";
+        document.body.insertBefore(script,document.body.firstChild);
+        JSONP由两部分组成：回调函数和数据
+            回调函数是接收到响应时应该在页面中调用的函数，其名字一般在请求中指定。
+            数据是传入回调函数中的JSON数据。
+        优点：
+            能够直接访问响应文本，可用于浏览器与服务器间的双向通信。
+        缺点：
+            JSONP从其他域中加载代码执行，其他域可能不安全；
+            难以确定JSONP请求是否失败。
+    5.Comet
+        Comet可实现服务器向浏览器推送数据。
+        Comet是实现方式：长轮询和流
+        短轮询即浏览器定时向服务器发送请求，看有没有数据更新。
+        长轮询即浏览器向服务器发送一个请求，然后服务器一直保持连接打开，直到有数据可发送。发送完数据后，浏览器关闭连接，随即又向服务器发起一个新请求。其优点是所有浏览器都支持，使用XHR对象和setTimeout()即可实现。
+        流即浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据，页面的整个生命周期内只使用一个HTTP连接。
+    6.WebSocket
+        WebSocket可在一个单独的持久连接上提供全双工、双向通信。
+        WebSocket使用自定义协议，未加密的连接时ws://；加密的链接是wss://。
+        var webSocket=new WebSocket("ws://");
+        webSocket.send(message);
+        webSocket.onmessage=function(event){
+        var data=event.data;
+        ... ....
+        }
+        注意：
+            必须给WebSocket构造函数传入绝对URL；
+            WebSocket可以打开任何站点的连接，是否会与某个域中的页面通信，完全取决于服务器；
+            WebSocket只能发送纯文本数据，对于复杂的数据结构，在发送之前必须进行序列化JSON.stringify(message))。
+        优点：
+            在客户端和服务器之间发送非常少的数据，减少字节开销。
+
+请给出这段代码的运行结果（ ）
+    <SCRIPT LANGUAGE="JavaScript">
+        var bb = 1;
+        function aa(bb) {
+            bb = 2;
+            alert(bb);
+        };
+        aa(bb);
+        alert(bb);
+    </SCRIPT>
+    2 1
+    函数体内，bb并没有使用var来定义，按理说这个bb在预处理的时候应该是window的属性。但在这里，函数声明的时候，带了一个参数bb，也就是相当于在函数体内声明了var bb。所以，函数里的bb就是函数活动对象的属性。所以函数执行时会输出2。函数执行完后，函数的活动对象被销毁，也就是局部的这个bb被删除了，执行流进入到window，再输出bb，值就是1了。
+    记住一句话就好了：“ECMA中所有函数的参数都是按值传递的”。
+    值传递：把一个值类型（也叫基本类型）传递给另一个变量时，其实是分配了一块新的存储空间，因此就本题来说，在内部改变这个值时，其实在函数外部对这个值没有影响。
+
+有效的javascript变量定义规则的是？
+    第一个字符必须是一个字母、下划线（_）或一个美元符号（$）；其他字符可以是字母、下划线、美元符号或数字。
+
+下面有关javascript系统方法的描述，错误的是？
+    parseFloat方法：该方法将一个字符串转换成对应的小数
+    错误：    isNaN方法：该方法用于检测参数是否为数值型，如果是，返回true，否则，返回false。
+    escape方法： 该方法返回对一个字符串编码后的结果字符串
+    eval方法：该方法将某个参数字符串作为一个JavaScript执行
+        eval：返回字符串表达式中的值
+        unEscape：返回字符串ASCI码
+        escape：返回字符的编码
+        parseFloat：返回实数
+
+常见事件：
+    1. 点击事件：
+        1. onclick：单击事件
+        2. ondblclick：双击事件
+    2. 焦点事件
+        1. onblur：失去焦点
+        2. onfocus:元素获得焦点。
+    3. 加载事件：
+        1. onload：一张页面或一幅图像完成加载。
+    4. 鼠标事件：
+        1. onmousedown    鼠标按钮被按下。
+        2. onmouseup    鼠标按键被松开。
+        3. onmousemove    鼠标被移动。
+        4. onmouseover    鼠标移到某元素之上。
+        5. onmouseout    鼠标从某元素移开。
+    5. 键盘事件：
+        1. onkeydown    某个键盘按键被按下。    
+        2. onkeyup        某个键盘按键被松开。
+        3. onkeypress    某个键盘按键被按下并松开。
+    6. 选择和改变
+        1. onchange    域的内容被改变。
+        2. onselect    文本被选中。
+    7. 表单事件：
+        1. onsubmit    确认按钮被点击。
+        2. onreset    重置按钮被点击。
+
+下面有关HTML的Doctype和严格模式与混杂模式的描述，错误的是？
+    <!DOCTYPE> 声明位于文档中的最前面，处于<html>标签之前。告知浏览器的解析器，用什么文档类型 规范来解析这个文档
+    在标准模式中，浏览器根据规范呈现页面；在混杂模式中，页面以一种比较宽松的向后兼容的方式显示
+    错误：    DOCTYPE不存在或格式不正确会导致文档以标准模式呈现
+    浏览器根据DOCTYPE是否存在以及使用的哪种DTD来选择要使用的呈现方法
+        文档类型
+            DTD（文档类型定义）是一组机器可读的规则，他们定义 XML 或 HTML 的特定版本中允许有什么，不允许有什么。在解析网页时，浏览器将使用这些规则检查页面的有效性并且采取相应的措施。浏览器通过分析页面的 DOCTYPE 声明来了解要使用哪个 DTD ，由此知道要使用 HTML 的哪个版本。
+        DOCTYPE 当前有两种风格，严格（ strict ）和过渡（ transitional ）。过渡 DOCTYPE 的目的是帮助开发人员从老版本迁移到新版本。
+            如果发送具有正确的 MIME 类型的 XHTML 文档，理解 XML 的浏览器将不显示无效的页面。
+        浏览器模式
+            浏览器有两种呈现模式：标准模式和混杂模式（quirks mode）。在标准模式中，浏览器根据规范呈现页面；在混杂模式中，页面以一种比较宽松的向后兼容的方式显示。
+        DOCTYPE 切换
+            对于 HTML 4.01 文档，
+            包含严格 DTD 的 DOCTYPE 常常导致页面以标准模式呈现。
+            包含过度 DTD 和 URI 的 DOCTYPE 也导致页面以标准模式呈现。
+            但是有过度 DTD 而没有 URI 会导致页面以混杂模式呈现。
+            DOCTYPE 不存在或形式不正确会导致 HTML 和 XHTML 文档以混杂模式呈现。
+
+下面有关JavaScript中 call和apply的描述，错误的是？
+    call与apply都属于Function.prototype的一个方法，所以每个function实例都有call、apply属性
+    错误：    两者传递的参数不同，call函数第一个参数都是要传入给当前对象的对象，apply不是
+    apply传入的是一个参数数组，也就是将多个参数组合成为一个数组传入
+    call传入的则是直接的参数列表。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。
+        call（）方法和apply（）方法的作用相同，他们的区别在于接收参数的方式不同。对于call（），第一个参数是this值没有变化，变化的是其余参数都直接传递给函数。（在使用call（）方法时，传递给函数的参数必须逐个列举出来。使用apply（）时，传递给函数的是参数数组）如下代码做出解释：
+            function add(c, d){
+            return this.a + this.b + c + d;
+            }
+            var o = {a:1, b:3};
+            add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16
+            add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34
+
+下述有关border:none以及border:0的区别，描述错误的是？ 
+    border:none表示边框样式无
+    border:0表示边框宽度为0
+    错误：    当定义了border:none，即隐藏了边框的显示，实际就是边框宽度为0
+    错误：    当定义边框时，仅设置边框宽度也可以达到显示的效果
+        1.效果
+            border-style:none;//无边框         
+            border-width:0;//边框宽度为0px  
+        2.区别
+            （1）性能差异
+                border:0;浏览器对border-width、border-color进行渲染，占用内存。
+                border:none;浏览器不进行渲染，不占用内存。
+                Chrome：
+                    border:none;>> border:initial none initial;
+                    border:0;>> border:0 initial  initial ;
+                Firefox、360：
+                    border:none; >>border:medium none;
+                    border:0;>> border:0 none;
+                计算出的样式：
+                    order:0px none 元素color属性值;
+            （2）浏览器兼容
+                IE7-不支持border:none;
+                W3C提示：请始终把border-style属性声明到border-color属性之前，元素必须在改变颜色之前获得边框。
+
+下面有关CSS sprites说法错误的是？
+    允许你将一个页面涉及到的所有零星图片都包含到一张大图中去
+    利用CSS的“background-image”，“background-repeat”，“background-position”的组合进行背景定位
+    错误：    CSS Sprites虽然增加了总的图片的字节，但是很好地减少网页的http请求，从而大大的提高页面的性能
+    CSS Sprites整理起来更为方便，同一个按钮不同状态的图片也不需要一个个切割出来并个别命名
+        CSS Sprites
+            1.简介
+                CSS Sprites在国内很多人叫css精灵，是一种网页图片应用处理方式。它允许将一个页面涉及到的所有零星图片都包含到一张大图中， 利用CSS的“background-image”，“background- repeat”，“background-position”的组合进行背景定位， 访问页面时避免图片载入缓慢的现象。
+            2.优点
+                （1）CSS Sprites能很好地减少网页的http请求，从而大大的提高页面的性能，这是CSS Sprites最大的优点，也是其被广泛传播和应用的主要原因；
+                （2）CSS Sprites能减少图片的字节；
+                （3）CSS Sprites解决了网页设计师在图片命名上的困扰，只需对一张集合的图片命名，不需要对每一个小图片进行命名，从而提高了网页制作效率。
+                （4）CSS Sprites只需要修改一张或少张图片的颜色或样式来改变整个网页的风格。
+            3.缺点
+                （1）图片合并麻烦：图片合并时，需要把多张图片有序的合理的合并成一张图片，并留好足够的空间防止版块出现不必要的背景。
+                （2）图片适应性差：在高分辨的屏幕下自适应页面，若图片不够宽会出现背景断裂。
+                （3）图片定位繁琐：开发时需要通过工具测量计算每个背景单元的精确位置。
+                （4）可维护性差：页面背景需要少许改动，可能要修改部分或整张已合并的图片，进而要改动css。在避免改动图片的前提下，又只能（最好）往下追加图片，但这样增加了图片字节。
+
+for(var i=0;i<5;++i){
+    setTimeout(function(){
+        console.log(i+ ' ');
+    },100);
+}
+以上代码执行的结果是（）。
+    5 5 5 5 5
+    每次循环进来之后，由于setTimeout()，内部的匿名函数并没有立即执行，而是等到100ms后，而此时i早已变为5。
+    1）可以利用匿名函数创建立即执行函数（或者叫模仿跨级作用域）来解决这个问题；
+        for(var i=0;i<5;++i){
+            (function(num){
+                setTimeout(function(){
+                console.log(num+ ' ');
+                },100);
+            })(i);
+        }
+        创建立即执行函数并传入参数i。 因为函数的参数是按值传递的，所以i的当前值就赋值给了num，并传递给了setTimeout 中的闭包，在闭包中保存了i当前值的一个副本。
+    2）也可以使用ES6中的 let命令
+        for(let i=0;i<5;++i){
+            setTimeout(function(){
+                console.log(i+'');
+            },100);
+        }
+    setTimeout() 是异步的，只有等到主线上的都执行完，才会执行异步的，此时i已经变成5。由于共循环了5次,异步队列中存放了 五次setTimeout()，会按照队列的顺序依次执行，且共同访问的是同一个变量。所以每次结果都是5，特别强调一下，这里和setTimetou(function,100)中的100 无关，假如：setTimeout(function,0)，变成0 结果也是一样的。
+
+var a = [];
+a[0]=1; a[1]=2; a[2]=3; a[5]=4;
+则数组a为
+    Array[6]
+    0: 1
+    1: 2
+    2: 3
+    3:undefined
+    4:undefined
+    5: 4
+    length: 6
+    __proto__: Array[0]
+
+cookie的有效时间默认为-1，如果不进行设置的话，就会默认在浏览器会话关闭时结束。
+可以通过setMaxAge()方法设置cookie的生命期。
+当setMaxAge(0)表示立刻删除该浏览器上指定的cookie
+
+JavaScript 的保留字
+    abstract
+    boolean break byte
+    case catch char class const continue
+    debugger default delete do double
+    else enum export extends
+    false final finally float for function
+    goto
+    if implements import in instanceof int interface
+    long
+    native new null
+    package private protected public
+    return
+    short static super switch synchronized
+    this throw throws transient true try typeof
+    var void volatile
+    while with
+
+this对象的理解正确的是 ()   
+    在不手动改变this指向的前提下，this总是指向函数的直接调用对象
+    如果有new关键字，this指向new出来的那个对象
+    IE中attachEvent中的this总是指向全局对象window
+
+以下是四种touch事件
+    touchstart:     //手指放到屏幕上时触发
+    touchmove:      //手指在屏幕上滑动式触发
+    touchend:    //手指离开屏幕时触发
+    touchcancel:     //系统取消touch事件的时候触发，这个好像比较少用
+    每个触摸事件被触发后，会生成一个event对象，event对象里额外包括以下三个触摸列表
+        touches:     //当前屏幕上所有手指的列表
+        targetTouches:      //当前dom元素上手指的列表，尽量使用这个代替touches
+        changedTouches:     //涉及当前事件的手指的列表，尽量使用这个代替touches
+
+在 JavaScript 中有 5 种不同的数据类型：
+    string 、number 、boolean 、object 、function
+3 种对象类型：
+    Object 、Date 、Array
+2 个不包含任何值的数据类型：
+    null 、undefined
+
+下面这段JS程序的执行结果是：
+    var user = {
+        count : 1,
+        getCount: function(){
+        return this.count;
+        }
+    }
+    var func = user.getCount
+    console.log(func())
+    输出：undefined
+        // 1.调用对象未声明的属性会undifned
+            var user={};
+            console.log(user.name);//undifned
+        // 2.使用未赋值只声明的基本数据类型会undifned
+            var one;
+            console.log(one);//undifned
+        // 3.使用未声明的变量会报错
+            console.log(two);//new_file.html:15 Uncaught ReferenceError: two is not defined
+        在本题中，this指向的是window,window对象已经自动被浏览器声明了，只是还没有声明count属性，所以也是undifned
+        因为func=user.getCount只是保存了getCount函数，并没有执行，该函数是在console里面执行，func()就相当于user.getCount()，一看是像user调用，其实func()就相当于一个全局的函数，实际上是window.func() ,也就是window.user.getCount()
+        func中的this指向的是window,所以会返回undefined。如果是没有加this才会是报错
+
+以下代码的执行后，str 的值是：
+var str = "Hellllo world";
+str = str.replace(/(l)\1/g, '$1');
+    Hello world
+    1、定义
+        (l)表示第一个分组里有l
+        \1表示所获取的第1个()匹配的引用
+        /g表示全局匹配
+        $1表示第一个分组里的值l
+    2、所以
+        (l)\l 表示匹配两个连续字符ll，即ll
+        (l)\l/g 表示全局匹配两个连续字符ll即llll
+        str.replace(/(l)\1/g, '$1') 表示将ll替换成l
+    3、最终
+        Hellllo =》 Hello
+
+以下哪些表达式的结果为true（）
+    undefined == null
+    parseInt("1a") === 1
+    [] instanceof Array
+
+在 Angular 中，Controller 之间通信的方式主要有三种：
+    1）作用域继承。利用子 Controller 控制父 Controller 上的数据。
+    2）注入服务。把需要共享的数据注册为一个 service，在需要的 Controller 中注入。
+    3）基于事件。利用 Angular 的事件机制，使用 $on、$emit 和 $boardcast
+    其中，作用域继承仅限于上下级之间的通信，注入服务和基于事件的机制可以实现任意级别的 Controller 通信。
+
+假设 output 是一个函数，输出一行文本。下面的语句输出结果是什么？
+output(typeof (function() {output(“Hello World!”)})());
+    Hello World! undefined
+    1.先立即执行匿名函数，输出Hello World！
+    2.函数执行后无返回值，则输出未定义
+
+写出下面代码的运行结果
+    var a,b;
+    (function(){
+        alert(a);
+        alert(b);
+        var a=b=3;
+        alert(a);
+        alert(b);
+    })();
+    alert(a);
+    alert(b);
+        undefined，undefined，3,3，undefined，3
+            var a,b;
+            (function(){
+                alert(a);   //这是第一个输出的,先在局部没找到a变量，然后去全局找，找到了但没定义，输出undefined
+                alert(b);    //这是第二个输出的，其他同上
+                var a=b=3;    //定义一个局部变量a=3,然后给全局变量b赋值 b=3;
+                alert(a);     //这是第三个输出，局部变量a=3
+                alert(b);     //这是第四个输出，全局变量b=3
+            })();            //这个函数体已经执行完毕，里面的内存已经被垃圾回收器回收，局部变量a销毁
+            alert(a);        //这是第五个输出，全局变量a=undefined
+            alert(b);        //这是第六个输出，全局变量b=3
+
+JavaScript RegExp 对象有 3 个方法：test()、exec() 和 compile()。
+    (1) test() 方法用来检测一个字符串是否匹配某个正则表达式，如果匹配成功，返回 true ，否则返回 false；
+    (2) exec() 方法用来检索字符串中与正则表达式匹配的值。exec() 方法返回一个数组，其中存放匹配的结果。如果未找到匹配的值，则返回 null；
+    （3）compile() 方法可以在脚本执行过程中编译正则表达式，也可以改变已有表达式。
+    注：match是支持正则表达式的String对象的方法
+
+以下表达式不会出现错误的有（）
+2.toString() ----->会
+2..toString() ----->不会
+2 .toString() ----->不会
+(2).toString() ----->不会
+    (1) 装箱 js并不是一切变量都是对象的语言 toString方法实际上是在对象上的 当我们对一个字面量直接使用这些在对象上的方法，js将会执行装箱操作调用new Number（或者是别的构造函数）
+    (2) 紧跟数字的.优先被认为是小数点
+    2.toString()之所以会报错，是因为在这里的 . 发生了歧义。它既可以理解为小数点，也可以理解为对方法的调用，问题就出在这里，我们想要后一种理解，而实际上，因为这个点紧跟于一个数字之后，按照规范，解释器就把它判断为一个小数点。我们也可以看下抛出的异常信息：“标识符紧跟于一个数字字面量之后。”说明 2.toString() 在解释器看来其实是：(2.)toString();所以只要再加上一个点就可以了：2..toString()，第一个点是数字的一部分，2. 被自动解释为整数值 2，而第二个点则是调用方法。
+
+下面哪些语句可以 在JS里判断一个对象oStringObject是否为String。
+    oStringObject instanceof String
+        JS 中值的类型分为原始值类型和对象类型。原始值类型包括 number, string, boolean, null 和 undefined；对象类型即 object。首先原始值类型它就不是对象。
+        另外，要注意 'hello' 和 new String('hello') 的区别，前者是字符串字面值，属于原始类型，而后者是对象。用 typeof 运算符返回的值也是完全不一样的：
+            typeof 'hello';  // 'string'
+            typeof new String('hello');  // 'object'
+        之所以很多人分不清字符串字面值和 String 对象，归根结底就是 JS 的语法对你们太过纵容了。当执行 'hello'.length 时，发现可以意料之中的返回 5，你们就觉得 'hello' 就是 String 对象，不然它怎么会有 String 对象的属性。其实，这是由于 JS 在执行到这条语句的时候，内部将 'hello' 包装成了一个 String 对象，执行完后，再把这个对象丢弃了，这种语法叫做 “装箱”，在其他面向对象语言里也有（如 C#）。
+        （typeof oStringObject == 'string'）这里typeof 只能判断是否是一个对象，而不能判断他具体属于哪个类的实例
+
+下面关于IE、FF下面脚本的区别描述错误的是？
+    A:innerText IE支持，FIREFOX不支持
+    B:document.createElement FIREFOX支持，IE不支持
+    C:setAttribute('class'，'styleClass') FIREFOX支持，IE不支持
+    D:用setAttribute设置事件 FIREFOX不支持，IE支持
+        A描述正确：Firefox 不支持 DOM 对象的 outerHTML innerText outerText 属性。
+        B描述错误： 在 IE6 IE7 IE8 中，createElement 方法不仅可以通过合法的标签名创建节点对象，还可以通过传入一段合法的 HTML 代码字符串作为参数创建节点对象。
+        C描述正确：I E6 IE7 IE8(Q) 中无法通过 "Element.setAttribute("class", "AttributeValue")" 设置元素的 class 属性，而需要使用 "Element.setAttribute("className", "AttributeValue")"；
+        D描述错误： IE6 IE7 IE8(Q) 中无法通过诸如 "Element.setAttribute("onclick", "alert('ok')")" 为元素绑定事件；
+
+class A {
+    String i = "op";
+    void func(String s) {
+        s = ""+9;
+    }
+    static void test() {
+        A a = new A();
+       a.func(a.i);
+    }
+}
+问：
+1. 变量i,s,a在堆还是在栈中？
+    i,s,a都在栈中，new出来的对象A在堆上。
+2. 第8行执行完后a.i的值是什么？
+    执行完后a.i的值还是字符串op。
+        1、考察js堆与栈：栈内存主要用于存储各种基本类型的变量，包括Boolean、Number、String、Undefined、Null以及对象变量的指针，堆主要存储object
+        所以字符串变量i,s以及对象指针a都存在栈中，new出来的对象开辟内存存在堆上，对应地址是指针a存的内容
+        2、考察参数传递按值传递：a是A类的实例，所以a.i='op'，a.func(a.i)这句执行函数，把a.i作为参数传递，该函数会复制一个变量，两个变量完全独立，所以在函数体里只是把复制的那个变量（一个新的局部变量）改变为'op9’,在函数体外的a.i并没有被改变
+        js的函数参数传递为值传递。
+        （1）当传入的是 基本类型(undefined null boolean number string)的参数时：就是复制了份内容给i而已。
+        （2）引用类型指的是对象。可以拥有属性和方法，并且我们可以修改其属性和方法。引用对象存放的方式是：在栈中存放对象变量标示名称和该对象在堆中的存放地址，在堆中存放数据。对象使用的是引用赋值。当我们把一个对象赋值给一个新的变量时，赋的其实是该对象的在堆中的地址，而不是堆中的数据。也就是两个对象指向的是同一个存储空间，无论哪个对象发生改变，其实都是改变的存储空间的内容，因此，两个对象是联动的。
+        （3）我们先来看一个例子：
+            var a = [1,2,3];
+            var b = a;
+            a = [4,5,6];
+            alert(b); //[1,2,3]
+            好像数组是基本类型一样。。，但是：
+            var a = [1,2,3];
+            var b = a;
+            a.pop();
+            alert(b); //[1,2]
+            这是怎么回事？
+            a = [4,5,6];//改变的是a引用本身，没有改变数组对象，a和b没有了关系。
+            a.pop();//改变的是数组对象，a引用没有改变。
+            b = a;//该操作后，b直接指向数组对象，不是b指向a，a再指向数组。
+            //所以改变a引用并不会对b引用造成影响，改变数组对象可以。
+
+请按顺序写出打印结果，并说明原因。
+    var name = 'global';
+    var obj = {
+        name: 'local',
+        foo: function(){
+            this.name = 'foo';
+        }.bind(window)
+    };
+    var bar = new obj.foo();
+    setTimeout(function() {
+        console.log(window.name);
+    }, 0);
+    console.log(bar.name);
+    
+    var bar3 = bar2 = bar;
+    bar2.name = 'foo2';
+    console.log(bar3.name);
+        答案：foo, foo2, global
+        解析：
+            考察点3个： 
+            1、输出顺序主要考察：Event Loop；
+            2、第一个和第三个输出考察：this指针；
+            3、第二个输出考察：引用类型赋值
+            主要是这句 var bar = new obj.foo()
+            这涉及到隐性绑定，硬绑定和new绑定
+            new绑定会使得this不管之前绑定了什么，this都会绑定给new的对象上
+            所以bar.name = this.name = ‘foo’
+            var bar3 = bar2 = bar复制的是bar地址
+            所以bar2修改name就是修改了this.name
+            所以bar3.name = ‘foo2’
+            setTimeout()不管什么时间都会最后出来
+            https://segmentfault.com/a/1190000016278115
+
+请写出如下代码运行后产生的结果，并给出解释，说明结果是如何得出的。
+    setTimeout(() => console.log('a'));
+    Promise.resolve().then(
+    () => console.log('b’);
+    ).then(
+    () => Promise.resolve('c').then(
+        (data) => {
+        setTimeout(() => console.log('d'));
+        console.log('f');
+        return data;
+        }
+    )
+    ).then(data => console.log(data));
+        bfcad
+        ```
+        // 定时器任务属于宏任务，并且需要先在任务队列等待，等到同步任务执行完，执行栈清空，才会在任务队列中按顺序选任务进去
+        setTimeout(() => console.log('a'));//4. 打印a
+        //Promise 属于异步微任务，在本轮同步任务结束之前执行
+        Promise.resolve().then(
+            // 1. 打印 b
+        () => console.log('b')  // 单引号要改为',然后去掉;号
+        ).then(
+            // 箭头函数的resolve传递的参数作为下一个then的参数
+        () => Promise.resolve('c').then(
+            // 执行箭头函数
+            (data) => {
+                // 把定时器任务也放入任务队列中等待，在第一个定时器之后
+            setTimeout(() => console.log('d')); //5. 打印d
+            // 2.打印 f
+            console.log('f');
+            // 此时返回的 数据作为下一个then的参数
+            return data;
+            }
+        )
+        ).then(data => console.log(data)); // 3.打印 c
+        
+        ```
+        * `打印bfcad`
+
+Event Loop是什么
+    event loop是一个执行模型，在不同的地方有不同的实现。浏览器和NodeJS基于不同的技术实现了各自的Event Loop。
+    浏览器的Event Loop是在html5的规范中明确定义。
+    NodeJS的Event Loop是基于libuv实现的。可以参考Node的官方文档以及libuv的官方文档。
+    libuv已经对Event Loop做出了实现，而HTML5规范中只是定义了浏览器中Event Loop的模型，具体的实现留给了浏览器厂商。
+    宏队列和微队列
+    宏队列，macrotask，也叫tasks。 一些异步任务的回调会依次进入macro task queue，等待后续被调用，这些异步任务包括：
+    setTimeout
+    setInterval
+    setImmediate (Node独有)
+    requestAnimationFrame (浏览器独有)
+    I/O
+    UI rendering (浏览器独有)
+    微队列，microtask，也叫jobs。 另一些异步任务的回调会依次进入micro task queue，等待后续被调用，这些异步任务包括：
+    process.nextTick (Node独有)
+    Promise
+    Object.observe  
+    MutationObserver
+        浏览器的Event Loop的具体流程：
+            执行全局Script同步代码，这些同步代码有一些是同步语句，有一些是异步语句（比如setTimeout等）；
+            1、全局Script代码执行完毕后，调用栈Stack会清空；
+            2、从微队列microtask queue中取出位于队首的回调任务，放入调用栈Stack中执行，执行完后microtask queue长度减1；
+            3、继续取出位于队首的任务，放入调用栈Stack中执行，以此类推，直到直到把microtask queue中的所有任务都执行完毕。注意，如果在执行microtask的过程中，又产生了microtask，那么会加入到队列的末尾，也会在这个周期被调用执行；
+            4、microtask queue中的所有任务都执行完毕，此时microtask queue为空队列，调用栈Stack也为空；
+            5、取出宏队列macrotask queue中位于队首的任务，放入Stack中执行；
+            6、执行完毕后，调用栈Stack为空；
+            7、重复第3-7个步骤；
+            8、重复第3-7个步骤；
+            ......
+            可以看到，这就是浏览器的事件循环Event Loop
+            这里归纳3个重点：
+            宏队列macrotask一次只从队列中取一个任务执行，执行完后就去执行微任务队列中的任务；
+            微任务队列中所有的任务都会被依次取出来执行，知道microtask queue为空；
+            图中没有画UI rendering的节点，因为这个是由浏览器自行判断决定的，但是只要执行UI rendering，它的节点是在执行完所有的microtask之后，下一个macrotask之前，紧跟着执行UI render。
+
+以下哪些选项可以将集合A转化为数组？
+    正确答案: A B C D  
+    A、Array.form(A)
+    B、[].slice.apply(A)
+    C、[…A]
+    D、[].map.call(A, o => o)
+    Array.from(arr, mapfn,thisArg)方法，用于将两类可以把对象转换为真正的数组：类似数组的对象和可遍历的对象（部署了Iterator接口的，String，ES6新增的Map和Set）。可以传3个参数，其中第一个是数组，必传；第二个是一个函数（类似map函数），对数组元素进行操作后再返回数组，可选；第三个是对于this关键字的指向，可选。
+    slice() 方法可从已有的数组中返回选定的元素。
+    返回值：返回一个新的数组，包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+    说明
+    请注意，该方法并不会修改数组，而是返回一个子数组。如果想删除数组中的一段元素，应该使用方法 Array.splice()。
+    所以在这里就是对集合A应用slice，返回一个新的数组，不对数组做任何改变。
+    展开运算符，把A集合的元素展开后，用数组[]承载，返回新的数组。
+    map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。
+    map() 方法按照原始数组元素顺序依次处理元素。
+    注意： map() 不会对空数组进行检测。
+    注意： map() 不会改变原始数组。
+    所以map方法返回了一个新的数组，并且数组中每个元素是A里面的元素。
+
+Ajax的优势
+    可搜索性
+        普通的文本网页会更有利于SEO。文本内容是搜索引擎容易检索的，而繁琐的swf字节码却是搜索引擎不愿触及的。虽然Google等一些大型的搜索引擎可以检索SWF内部的内容，但是仍然有很多麻烦存在。
+    开放性
+        Flash常年以来被Macromedia看的很死。包括Flex、FMS等辅佐技术一直都需要昂贵的安装、维护费用。而JS则没有这样的麻烦。没有人愿意承担法律和版权的风险。
+    费用
+        Flash开发是很昂贵的，因为FlashIDE等环境都是要收费的．而Ajax则不同．虽然有一些便宜的生成swf的工具，但是他们的工能实在无法满足复杂需求。
+    易用性
+        Ajax程序有更好的易用性。由于中间有一层Flashplayer***层，因此许多辅助功能无法被Flash灵活利用。而且Flash在一些方面有着不好的口碑。比如弹出广告、比如恶意代码。
+        （awflasher.com个人认为这八成是乱上xx网站造成的）
+    易于开发
+        人们开发复杂的Ajax和Flash应用程序时，都会借助一些高级的开发工具。普遍来说，Ajax的开发包比Flash简便、容易。
+Flash的优势
+    多媒体处理
+        Flash在音频、视频等多媒体领域相比HTML有绝对的优势。现在几乎所有的网站都包含有Flash内容
+    兼容性
+        兼容性好：由于通过了唯一的FlashPlayer“***”。人们不必像调试JS那样，在不同的浏览器中调试程序。
+    矢量图型
+        这是Flash最大的优势，同样处在这一领域的SVG、Canvas element以及Direct完全不能与Flash相比。
+    客户端资源调度
+        Flash能够更容易的调用浏览器以外的外部资源。比如摄像头、麦克风等。然而这是普通的HTML无法完成的。但是这也许是一个缺点（为什么呢？）
+    1.Ajax的优势：1.可搜索性 2.开放性 3.费用 4.易用性 5.易于开发。
+    2.Flash的优势：1.多媒体处理 2.兼容性 3.矢量图形 4.客户端资源调度
+    3.Ajax的劣势：1.它可能破坏浏览器的后退功能   2.使用动态页面更新使得用户难于将某个特定的状态保存到收藏夹中 ，不过这些都有相关方法解决。
+    4.Flash的劣势：1.二进制格式 2.格式私有 3.flash 文件经常会很大，用户第一次使用的时候需要忍耐较长的等待时间  4.性能问题
+
+
+javascript 一般使用var key = val；的形式复制，声明变量的时候也要用var key； 如果不用var关键字，声明的就是全局变量，一般不要这么做；
+    变量重复声明也不会错，js里有声明提前，如果两次声明都有赋值，如：var a=10; var a=100; 则变量a的值是100； 若var a=10; var a; 则变量a的值是10；第二次的var a；没什么用。JS代码执行时候，先扫一遍JS代码，进行JS变量定义，定义时候不赋值，结束完成后，开始执行JS代码，当执行到赋值语句的时候，开始给变量赋值。
+
+[] == [] 输出的结果是？为什么？
+    数组的存储是堆空间，所以数组的标识存放的只是对应数据的地址值，所以数组之间都不完全相等，题目中的两个数组只是值相等，地址值不同，所以答案false
+
+请说出三种减少网页加载时间的方法。
+    服务器角度
+        采取CDN加速
+        开启gzip压缩
+        允许使用强缓存或协商缓存
+        增加服务器带宽
+    客户端角度
+        合理组织CSS、JavaScript代码位置
+        减少DOM操作、添加事件委托
+        部分操作可设置防抖和节流
+        对于可预见的操作采取preload或prerender的预加载
+        对于图片可以懒加载
+        合并CSS图片（精灵图/雪碧图）
+        减少使用iframe
+        资源优化打包角度
+    使用打包工具将Js文件、CSS文件和静态文件进行恰当打包处理。
+
+http协议中与资源缓存相关的协议头有哪些？
+    通过响应来控制缓存，在响应头中主要有cache-control、pragma、expires三个响应头，其中expires是HTTP1.0中的响应头，后面直接跟一个缓存失效日期，但是服务器和客户端之间的时钟往往不同，因此通过该响应头来控制缓存失效时间不准确，一般不用，如果要设置客户端不缓存，则设置响应头“expires: -1”即可；pragema是HTTP1.1协议为了兼容HTTP1.0+协议，用来控制不缓存，“pragma: no-cache"；cache-control是HTTP1.1中的响应头，其参数为相对的秒值，即过多少秒缓存失效，因此建议使用该响应头来控制缓存失效时间，其后可以跟的内容有no-cache、no-store、max-age、must-revalidate
+    为了兼容各个协议版本，要想客户端不缓存资源，一般都添加三个响应头：cache-control: no-cache、pragma: no-cache、expires: -1
+    注意：cache-control: no-cache控制缓存，客户端是会缓存资源的，只是在于原始服务器进行再验证之前不会想客户端提供资源，也就是资源新鲜度永远过期，这样比直接访问服务器节省了资源在网络中的传输成本，相比开启缓存增加了再验证的成本，性能失效介于两者之间；要想客户端缓存不从响应中拷贝资源副本，则应该使用cache-control: no-store，使用该响应头内容也可以让缓存立即删除已经拷贝的副本；而must-revalidate是服务器希望缓存能严格遵守过期信息，一般情况下类似no-cache，但在缓存与原始服务器进行新鲜度验证的时候，原始服务器不可用，这将会导致这一段时间中访问该资源会504 gateway timeout，因此建议使用no-cache
+
+CSS中box-sizing有哪些值?区别是什么?
+    box-sizing是CSS3新增属性，可调整盒子模型的样式。
+    box-sizing：border-box表示盒模型基于IE的盒模型，width和height决定盒模型的content区、padding区和border区。
+    box-sizing：content-box表示盒模型基于标准盒模型，width和height只决定盒模型的content区
+    box-sizing：inherit表示继承自父元素。
+
+DOM Tree与Render Tree之间的区别是什么?
+    Dom Tree 包含了所有的HTMl标签，包括display：none  ，JS动态添加的元素等。
+    Dom Tree 和样式结构体结合后构建呈现Render Tree。Render Tree 能识别样式，每个node都有自己的style，且不包含隐藏的节点（比如display : none的节点）。
+
+在Javascript中什么情况下会进行装箱/拆箱转换?
+    装箱：把基本数据类型转换成对应的引用类型的操作。
+    拆箱：把引用类型转换成基本数据类型的操作。
+    在Javascript中出现 基本数据类型数据 和 引用数据类型数据要进行转换的情况下会进行装箱/拆箱操作。
+
+计算一个整数的二进制表示中连续出现1最多的次数。
+比如13的二进制是：1101，那么他的二进制表示中连续出现的1最多为2次，所以答案就是2：
+    var num = parseInt(readline());
+    // 将数据转换成二进制
+    const str = num.toString(2);
+    // 用正则匹配二进制字符串中连续的1出现的情况
+    const arr = str.match(/1*/ig);
+    
+    // 判断匹配中的结果
+    if(arr.length) {
+        // 匹配中了多个连续的1，获取长度最长的那个
+        print(Math.max(... arr.map(item => item.length)));
+    } else {
+    // 如果数组长度为0，则是没有匹配中连续的1，则查看是否有1出现
+        print(str.indexOf("1") >= 0 ? 1 : 0);
+    }

@@ -1,0 +1,651 @@
+jQuery概述
+    JavaScript库
+        JavaScript 库常被称为 JavaScript 框架。
+    jQuery 是目前最受欢迎的 JavaScript 框架。
+    它使用 CSS 选择器来访问和操作网页上的 HTML 元素（DOM 对象）。
+    jQuery 同时提供 companion UI（用户界面）和插件。
+    jquery入口函数
+        //1.等待页面DOM加载完毕再去执行js代码
+            $(document).ready(function(){
+                $('div').hide();
+            })
+        //2.等待页面DOM加载完毕再去执行js代码（推荐使用）
+            $(function(){
+                $('div').hide();
+            })
+            等着DO结构渲染完毕，即可执行内部函数代码，不必等到所有外部资源加载完毕，jQuery帮我们完成了封装。相对于原生JS中的DOMContentLoaded;
+            不同于原JS 中的load事件是等待页面文档外部JS文件css文件图片加载完毕才去执行内部代码。
+    jQuery顶级对象
+        $是jQuery的别称（$可以使用jQuery代替）
+        $是jQuery的顶级对象，相当于原生JS里的window。
+    jQuery对象和DOM对象
+        DOM对象，用原生JS获取的对象就是DOM对象
+            var div=document.querySelector('div');
+        jQuery对象：使用jQuery获取的对象就是jQuery对象，本质是通过$将DOM元素进行封装产生的新对象，以伪数组进行存储
+            $('div');//此时 $('div')就是一个jQuery对象
+        jQuery对象只能使用jQuery方法，DOM对象则使用原生的JS属性和方法
+        jQuery对象和DOM对象之间是可以相互转化的
+            DOM对象转换jQuery对象
+                $(DOM对象);
+                //1.直接获取
+                $('video');
+                //2.已经使用原生JS获取来了DOM对象
+                var myvideo=document.querySelector('video');
+                $(myvideo);
+            jquery对象转化为DOM对象(两种方法)
+                1.$('video')[index] //index是索引号
+                    $('video')[0].play();
+                2.$('video').get(index) //index是索引号
+                    $('video').get(0).play();
+jQuery常用API导读
+    jQuery选择器
+        $('选择器') //里面的选择器直接写css的选择器即可，但是要加引导
+        一、基本选择器
+            语法	        说明
+            $("*")	        选择文档中的所有元素
+            $("div")	    元素选择器，选择所有的div元素，返回数组
+            $("#id")	    Id选择器，返回单个元素
+            $(".class")	    class选择器，返回数组
+            $("p , div")	并列选择器，返回所有的p元素和div元素
+            <!-- more -->
+        二、层次选择器
+            语法	    说明
+            $("A B")	后代选择器，选择所有A元素下面的所有B子元素，包含非直接子节点
+            $("A > B")	子元素选择器，选择A下面的直接B子元素，不包含非直接子节点
+            $("A + B")	紧邻兄弟元素选择器，选择A元素后面紧邻的B元素，如果没有不选中，等同于next()方法
+            $("A ~ B")	兄弟元素选择器，选择A后面所有的B元素，等同于nextAll()方法
+        三、过滤选择器
+            1、基本过滤选择器
+                语法	                说明
+                $("span : first")	    选取第一个元素
+                $("span : last")	    选取第二个元素
+                $("span : not(.wrap)")	取非元素
+                $("tr : even")	        选取偶数行（索引从0开始）
+                $("tr : odd")	        选取奇数行（索引从0开始）
+                $("tr : eq(2)")	        选取指定索引的元素（索引从0开始）
+                $("tr : gt(2)")	        选取大于索引号的元素（索引从0开始）
+                $("ul li : lt(2)")	    选取小于索引号的元素（索引从0开始）
+                $(" : header")	        选取所有的标题元素
+                $(" : animated")	    选取所有的动画元素
+            2、内容过滤选择器
+                语法	                        说明
+                $("span : contains('hello')")	选取包含具体文本的元素
+                $("span : empty”)	            选取不包含子元素或文本为空的元素
+                $("ol li : parent”)	            选取包含子元素或文本不为空的元素
+                $("div : has(span)”)	        选取子元素含有指定元素的元素，不是直系子元素也会生效
+            3、可见性过滤选择器
+                语法	            说明
+                $("div : hidden")	仅选取display:none或input type="hidden"的元素，不选取visibility: hidden或opacity:0的元素，也就是说:hidden只匹配那些“隐藏的”并且不占空间的元素
+                $("div : visible")	选取可见的元素
+            4、属性过滤选择器
+                语法	                        说明
+                $("[href]")	                    选取所有带有 href 属性的元素
+                $("[href = '#']")	            选取所有 href 属性的值等于 "#" 的元素
+                $("[href != '#']")	            选取所有 href 属性的值不等于 "#" 的元素
+                $("[herf ^= 'http']")	        选取所有 href 属性的值以 "http" 开头的元素
+                $("[herf &dollar;= '.jsp']")	选取所有 href 属性的值以 "jsp" 结尾的元素
+                $("[herf *= 'www']")	        选取所有 href 属性的值包含 "www" 的元素
+        四、表单选择器
+            1、基本表单选择器
+                语法	        说明
+                $(":input")	    选取所有的 input 元素
+                $(":text")	    选取所有type="text"的 input 元素
+                $(":password")	选取所有type="password"的 input 元素
+                $(":radio")	    选取所有type="radio"的 input 元素
+                $(":checkbox")	选取所有type="checkbox"的 input 元素
+                $(":submit")	选取所有type="submit"的 input 元素和button的元素
+                $(":reset")	    选取所有type="reset"的 input 元素和button的元素
+                $(":button")	选取所有type="button"的 input 元素和所有标签为button的元素
+                $(":image")	    选取所有type="image"的 input 元素
+                $(":file")	    选取所有type="file"的 input 元素
+            2、表单元素过滤选择器
+                语法	        说明
+                $(":enabled")	选择所有启用的 input 和 button 元素
+                $(":disabled")	选择所有禁用（即设置了disabled="disabled"）的 input 和 button 元素
+                $(":selected")	选择所有被选中下拉列表 选项
+                $(":checked")	选择所有被选中的复选框 或单选 按钮元素
+        五、jQuery CSS 选择器
+            jQuery CSS 选择器可用于改变 HTML 元素的 CSS 属性。
+            语法： jQuery选择器.css("css属性", "css属性值");
+                $("div").css("background-color","red");
+        六、jQuery查找父、子、兄弟节点的方法
+            语法	                说明
+            jQuery.parent(expr)	    找父节点，可以传入expr进行过滤，比如$("span").parent()或者&dollar;("span").parent(".class")
+            jQuery.parents(expr)	查找所有祖先元素，从父元素开始查找
+            jQuery.closest(expr)	查找第一个匹配的祖先元素，从当前元素开始查找
+            jQuery.children(expr)	返回所有子节点，这个方法只会返回直接的孩子节点，不会返回所有的子孙节点，类似于子代选择器 ul>li,只是选第一个子节点，亲儿子，带参数就选择第一个满足参数的子节点。
+            jQuery.contents()	    返回下面的所有内容，包括节点和文本。
+            jQuery.prev()	        返回上一个兄弟节点，不是所有的兄弟节点
+            jQuery.prevAll()	    返回所有之前的兄弟节点
+            jQuery.next()	        返回下一个兄弟节点，不是所有的兄弟节点
+            jQuery.nextAll()	    返回所有之后的兄弟节点
+            jQuery.siblings()	    返回兄弟姐妹节点，不分前后,返回除了自身元素的所有兄弟元素
+            jQuery.find(expr)	    不会有初始集合中的内容，比如$("p"),find("span"),是从子元素中找，等同于&dollar;("p span")
+                                    注意：find（）可以选择里面所有的孩子，包括儿子和孙子 find（）类似于后代选择器
+            jQuery.filter(expr)	    会有初始集合中的内容
+        jQuery隐式迭代
+            $('.class')返回的是一个对象数组，对其调用方法其实是对每个数组中每个元素迭代调用这个方法，相当于使用了循环，遍历元素调用方法。（遍历内部DOM元素的过程就叫做隐式迭代）
+        jQuery的排他思想
+            <button>0</button>
+            <button>0</button>
+            <button>0</button>
+            <button>0</button>
+            <button>0</button>
+            <button>0</button>
+            <button>0</button>
+            <button>0</button>
+            <script>
+                $(function(){
+                    //1.隐式迭代 给所有的按钮都绑定了点击事件
+                    $('button').click(function(){
+                        //2.给当前的元素添加背景色
+                        $(this).css("background","red");
+                        //3.其他元素去掉颜色
+                        $(this).siblings("button").css("background","");
+                    })
+                })
+            </script>
+        链式编程
+            $(this).css("color","red").siblings().hide();
+    jQuery样式操作
+        设置样式
+            .css() 为标签添加样式
+            .css( "属性" , "属性值" )
+            .css( "属性"  , "属性值").css( "属性" , "属性值" )
+            .css( {"属性" : "属性值" } )
+                ("#dv").css("background","red").css("background","red");
+                $("#dv").css(  { "background" : "red"  ,  "width" : "20px"}  );
+                //获取宽和高的属性值---->数字类型
+                var width=("#dv").height()*2;
+                //设置元素的宽和高--->参数可以是数字也可以是字符串
+                ("#dv").height(height);
+        添加样式
+            .addClass()  为元素添加类样式
+            addClass(" 类样式名字 ")； 添加一个类样式
+            addClass(" 类样式名字1  类样式名字2 ")； 添加多个类样式
+            注意：添加多个样式的时候  中间以空格隔开
+                ("#dv").addClass("cls_1 cls_2");    多个样式
+        移除样式
+            removeClass()  移除样式
+            removeClass( "  类样式名字 " )；  移除类样式
+            removeClass( )  移除当前元素所有的样式
+                ("body").removeClass();
+        判断是否应用样式
+            hasClass() 判断当前元素是否应用了某个类样式
+            hasClass( " 类样式名字 " )
+                var result=$("#dv").hasClass("cls");
+                返回值为：==true==、==false==
+        切换元素样式
+            toggleClass();  切换元素的类样式
+            toggleClass( " 类样式名字 ");
+            注意：该方法可以添加和移除类样式   多次操作
+                $("body").toggleClass("cls");//切换类样式
+        常见的样式的操作
+            获取与设置宽高
+                //获取宽和高的属性值---->数字类型
+                    var width=("#dv").height()*2;
+                //设置元素的宽和高--->参数可以是数字也可以是字符串
+                    ("#dv").height(height);
+            获取设置位置
+                ("#dv").offset().top;
+                $("#dv").offset({"left":200,"top":200});
+            获取滚动条高度
+                (this).scrollTop()
+    jQuery效果
+        animate()	对被选元素应用"自定义"的动画
+            实例
+                通过改变元素的高度，对元素应用动画：
+                $("button").click(function(){
+                    $("#box").animate({height:"300px"});
+                });
+            语法：
+                (selector).animate({styles},speed,easing,callback) 
+                    speed	可选。规定动画的速度。
+                    easing	可选。规定在动画的不同点中元素的速度。默认值是 "swing"。
+                            可能的值：
+                            "swing" - 在开头/结尾移动慢，在中间移动快
+                            "linear" - 匀速移动
+                            提示：扩展插件中提供更多可用的 easing 函数。 
+                    callback	可选。animate 函数执行完之后，要执行的函数。 styles	必需。规定产生动画效果的一个或多个 CSS 属性/值。
+                            注意： 当与 animate() 方法一起使用时，该属性名称必须是驼峰写法： 您必须使用 paddingLeft 代替 padding-left，marginRight 代替 margin-right，依此类推。
+                            可以应用动画的属性：
+                            backgroundPositionX
+                            backgroundPositionY
+                            borderWidth
+                            borderBottomWidth
+                            borderLeftWidth
+                            borderRightWidth
+                            borderTopWidth
+                            borderSpacing
+                            margin
+                            marginBottom
+                            marginLeft
+                            marginRight
+                            marginTop
+                            outlineWidth
+                            padding
+                            paddingBottom
+                            paddingLeft
+                            paddingRight
+                            paddingTop
+                            height
+                            width
+                            maxHeight
+                            maxWidth
+                            minHeight
+                            minWidth
+                            fontSize
+                            bottom
+                            left
+                            right
+                            top
+                            letterSpacing
+                            wordSpacing
+                            lineHeight
+                            textIndent
+                            提示：颜色动画不包含在核心 jQuery 库中。如果您想要应用动画颜色，您需要从 jQuery.com 下载 颜色动画插件。        
+        clearQueue()	对被选元素移除所有排队函数（仍未运行的）
+        delay()	    对被选元素的所有排队函数（仍未运行）设置延迟
+        dequeue()	移除下一个排队函数，然后执行函数
+        fadeIn()	逐渐改变被选元素的不透明度，从隐藏到可见
+            实例
+                使用淡入效果显示所有 <p> 元素：
+                $("button").click(function(){
+                    $("p").fadeIn();
+                });
+            定义和用法
+                fadeIn() 方法逐渐改变被选元素的不透明度，从隐藏到可见（褪色效果）。
+                注释：隐藏的元素不会被完全显示（不再影响页面的布局）。
+                提示：该方法通常与 fadeOut() 方法一起使用。
+            语法
+                $(selector).fadeIn(speed,easing,callback)
+        fadeOut()	逐渐改变被选元素的不透明度，从可见到隐藏
+            实例
+                使用淡出效果显示所有 <p> 元素：
+                $("button").click(function(){
+                    $("p").fadeOut();
+                });
+            定义和用法
+                fadeOut() 方法逐渐改变被选元素的不透明度，从可见到隐藏（褪色效果）。
+                注释：隐藏的元素不会被完全显示（不再影响页面的布局）。
+                提示：该方法通常与 fadeIn() 方法一起使用。
+            语法
+                $(selector).fadeOut(speed,easing,callback)
+        fadeTo()	把被选元素逐渐改变至给定的不透明度
+            实例
+                逐渐改变所有 <p> 元素的不透明度：
+                $("button").click(function(){
+                    $("p").fadeTo(1000,0.4);
+                });
+            定义和用法
+                fadeTo() 方法逐渐改变被选元素的不透明度为指定的值（褪色效果）。
+            语法
+                $(selector).fadeTo(speed,opacity,easing,callback)
+            参数	描述
+                speed	必需。规定褪色效果的速度。
+                        可能的值：
+                        毫秒
+                        "slow"
+                        "fast"
+                opacity	必需。规定要淡入或淡出的透明度。必须是介于 0.00 与 1.00 之间的数字。
+                easing	可选。规定在动画的不同点上元素的速度。默认值为 "swing"。
+                        可能的值：
+                        "swing" - 在开头/结尾移动慢，在中间移动快
+                        "linear" - 匀速移动
+                        提示：扩展插件中提供更多可用的 easing 函数。
+                callback	可选。fadeTo() 方法执行完之后，要执行的函数。
+        fadeToggle()	在 fadeIn() 和 fadeOut() 方法之间进行切换
+            实例
+                不同盒子淡入和淡出的切换：
+                $("button").click(function(){
+                $("#div1").fadeToggle();
+                });
+            定义和用法
+                fadeToggle() 方法在 fadeIn() 和 fadeOut() 方法之间切换。
+                如果元素是淡出显示的，fadeToggle() 会使用淡入效果显示它们。
+                如果元素是淡入显示的，fadeToggle() 会使用淡出效果显示它们。
+                注释：隐藏的元素不会被完全显示（不再影响页面的布局）。
+            语法
+                $(selector).fadeToggle(speed,easing,callback)
+        finish()	对被选元素停止、移除并完成所有排队动画
+        hide()	隐藏被选元素
+            实例
+                隐藏所有 <p> 元素：
+                $("button").click(function(){
+                    $("p").hide();
+                });
+            定义和用法
+                hide() 方法隐藏被选元素。
+                提示：这与 CSS 属性 display:none 类似。
+                注释：隐藏的元素不会被完全显示（不再影响页面的布局）。
+            语法
+                $(selector).hide(speed,easing,callback)
+            speed	可选。规定隐藏效果的速度。
+                    可能的值：
+                    毫秒
+                    "slow"
+                    "fast"
+            easing	可选。规定在动画的不同点上元素的速度。默认值为 "swing"。
+                    可能的值：
+                    "swing" - 在开头/结尾移动慢，在中间移动快
+                    "linear" - 匀速移动
+                    提示：扩展插件中提供更多可用的 easing 函数。
+            callback	可选。hide() 方法执行完之后，要执行的函数。
+        queue()	显示被选元素的排队函数
+        show()	显示被选元素
+            实例
+                显示所有隐藏的 <p> 元素：
+                    $("button").click(function(){
+                        $("p").show();
+                    });
+            定义和用法
+                show() 方法显示隐藏的被选元素。
+                注意：show() 适用于通过 jQuery 方法和 CSS 中 display:none 隐藏的元素（不适用于通过 visibility:hidden 隐藏的元素）。
+            语法
+                $(selector).show(speed,easing,callback)
+                    speed	可选。规定显示效果的速度。
+                            可能的值：
+                            毫秒
+                            "slow"
+                            "fast"
+                    easing	可选。规定在动画的不同点上元素的速度。默认值为 "swing"。
+                            可能的值：
+
+                            "swing" - 在开头/结尾移动慢，在中间移动快
+                            "linear" - 匀速移动
+                            提示：扩展插件中提供更多可用的 easing 函数。
+                    callback	可选。show() 方法执行完之后，要执行的函数。
+        slideDown()	通过调整高度来滑动显示被选元素（下拉）
+            实例
+                以滑动方式显示所有隐藏的 <p> 元素：
+                $("button").click(function(){
+                $("p").slideDown();
+                });
+            定义和用法
+                slideDown() 方法以滑动方式显示被选元素。
+                注意：slideDown() 适用于通过 jQuery 方法隐藏的元素，或在 CSS 中声明 display:none 隐藏的元素（不适用于通过 visibility:hidden 隐藏的元素）。
+                提示：如需以滑动方式隐藏元素，请查看 slideUp() 方法。
+            语法
+                $(selector).slideDown(speed,easing,callback)
+        slideToggle()	slideUp() 和 slideDown() 方法之间的切换
+            实例
+            在所有 <p> 元素上进行 slideUp() 和 slideDown() 之间的切换：
+            $("button").click(function(){
+            $("p").slideToggle();
+            });
+            定义和用法
+                slideToggle() 方法在被选元素上进行 slideUp() 和 slideDown() 之间的切换。
+                该方法检查被选元素的可见状态。如果一个元素是隐藏的，则运行 slideDown()，如果一个元素是可见的，则运行 slideUp() - 这会造成一种切换的效果。
+            语法
+                $(selector).slideToggle(speed,easing,callback)
+        slideUp()	通过调整高度来滑动隐藏被选元素
+            实例
+                以滑动方式隐藏所有的 <p> 元素：
+                $("button").click(function(){
+                $("p").slideUp();
+                });
+            定义和用法
+                slideUp() 方法以滑动方式隐藏被选元素。
+                注意：隐藏的元素不会被完全显示（不再影响页面的布局）。
+                提示：如需以滑动方式显示元素，请查看 slideDown() 方法。
+            语法
+                $(selector).slideUp(speed,easing,callback)
+        stop()	停止被选元素上当前正在运行的动画
+            动画队列及其停止排队
+            实例
+                停止当前正在运行的动画：
+                $("#stop").click(function(){
+                    $("div").stop();
+                });
+                定义和用法
+                    stop() 方法为被选元素停止当前正在运行的动画。
+                语法
+                    $(selector).stop(stopAll,goToEnd)
+                参数	描述
+                    stopAll	可选。布尔值，规定是否停止被选元素的所有加入队列的动画。默认是 false。
+                    goToEnd	可选。布尔值，规定是否立即完成当前的动画。默认是    false。
+                $(function(){
+                    //1 写法1
+                    // $(".nav>li").mouseenter(function () { 
+                    //     $(this).children('ul').slideDown();
+                    // });
+                    // $('.nav>li').mouseleave(function(){
+                    //     $(this).children('ul').slideUp();
+                    // })
+                    //写法2 事件切换hover就是鼠标经过和离开的复合写法
+                    // $(".nav>li").hover(function(){
+                    //     $(this).children('ul').slideDown();
+                    // },function(){
+                    //     $(this).children('ul').slideUp();
+                    // })
+                    //写法3 如果只有一个函数，那么鼠标经过和离开都会触发这个函数
+                    $(".nav>li").hover(function(){
+                        $(this).children('ul').stop().slideToggle();
+                    })
+                })
+        toggle()	hide() 和 show() 方法之间的切换
+            实例
+                在所有 <p> 元素上进行隐藏和显示之间的切换：
+                $("button").click(function(){
+                    $("p").toggle();
+                });
+            定义和用法
+                toggle() 方法在被选元素上进行 hide() 和 show() 之间的切换。
+                该方法检查被选元素的可见状态。如果一个元素是隐藏的，则运行 show()，如果一个元素是可见的，则运行 hide() - 这会造成一种切换的效果。
+                注释：隐藏的元素不会被完全显示（不再影响页面的布局）。
+                提示：该方法可被用于自定义函数之间的切换。
+            $(selector).toggle(speed,easing,callback)
+        动画队列及其停止排队
+            stop
+    jQuery属性操作
+        设置或者获取元素的固有属性值 prop()
+            所谓的元素固有属性就是元素本身自带的属性，比如<a></a>元素里的href,<input>里的type;
+            获取
+            //element.prop("属性名")；
+            $("a").prop("href");
+            设置或者修改
+            //element.prop("属性名","属性值");
+            $("input").change(function(){
+                console.log($(this).prop("checked"));
+            })
+        设置或者获取元素的自定义属性值 attr()
+        注：该方法也可以获取h5的自定义属性
+            获取
+            //element.attr("自定义属性名")；
+            $("a").attr("index");
+            设置或者修改
+            //element.attr("自定义属性名","属性值");
+            console.log($("div").attr("date-index"));
+        数据缓存date()
+            date()方法可以在指定元素上存取数据，并不会修改DOM元素结构，一旦页面刷新，之前存储的数据都将被移除
+            $("span").date("uname","andy");
+            console.log( $("span").date("uname"));
+            对于h5,这个方法获取date-index h5自定义 属性 不需要写date- 而且返回的是数字型
+            console.log( $("div").date("index"));
+    jQuery文本属性值
+        获取设置元素内容 html() 相对于原生js里的innerHTML 连带着标签一起输出
+            console.log($("div").html());
+            $("div").html("1234");
+        获取设置元素文本内容 text() 相对于原生js里的innerText 忽略标签，只操作内容
+            console.log($("div").text());
+            $("div").text("1234");
+        获取设置表单值 val()
+            console.log($("input").val());
+            $("input").val("1234");
+        保留2位小数 toFixed(2);
+    jQuery元素操作
+        遍历元素
+            jQuery隐式迭代是对同一类元素做了同一类操作，如果想给元素做不同操作，就需要用到遍历
+                语法：$("div").each(function(index,domEle){
+                    xxxx;
+                })
+                each（）方法遍历匹配到的每一个元素，主要使用dom处理，each每一个
+                里面的回调函数有两个参数，index是每个元素的索引号，demElem是每个DOM对象，不是jQuery对象
+                所以需要使用jQuery方法就需要将DOM转换为jQuery对象$(domEle)
+                String 转换为 Number 有很多种方式.
+                    parseInt(num); // 默认方式 (没有基数)
+                    parseInt(num, 10); // 传入基数 (十位数)
+                    parseFloat(num); // 浮点数
+                    Number(num); // Number 构造器
+                    ~~num; //按位非
+                    num / 1; // 除一个数
+                    num * 1; // 乘一个数
+                    num -
+                    0 + // 减去0
+                        num; // 一元运算符 "+"
+                语法：$.each(obj,function(index,element){
+                    xxxx;
+                })
+                $.each()方法可以用于遍历任何对象，主要用于数据处理，比如数组，对象
+                里面的回调函数有两个参数，index是每个元素的索引号，element是遍历对象
+        创建元素
+            语法：$("<li></li>");动态创建了一个li标签
+                1.创建元素
+                    var li=$("<li></li>");
+                2.添加元素
+                    1.内部添加(父子关系)
+                        语法：elelmet.append("内容")；将内容放在匹配元素内部的后面，相当于原生js的appendChild;
+                        $("ul").append(li);
+                        语法：elelmet.prepend(“内容”); 将内容放在匹配元素内部的前面，相当于原生js的insertBefore;
+                        $("ul").prepend(li);
+                    2.外部添加（兄弟关系）
+                        element.after("内容");//把内容放在目标元素的后面
+                        element.before("内容");//把内容放在目标元素的前面
+                        var div=$("<div>0222</div>");
+                        $("div").after(div);
+                        $("div").before(div);
+                3.删除元素
+                    语法：elelmet.remove()//删除匹配的元素本身
+                        $("ul").remove();
+                    element.empty();//删除匹配的元素集合中的所有子节点
+                        $("ul").empty();
+                    element.html("");//清空匹配元素的内容,和empty作用相同   
+    jQuery尺寸位置操作
+        获取并设置各种 CSS 属性所代表的尺寸。
+        以下参数为空，则是获取对应的值，返回的是数字型，不戴单位px
+        如果参数为数字，则是修改相应的值
+            .height()
+                获取匹配元素集合中的第一个元素的当前计算高度值。设置每一个匹配元素的高度值。
+            .width()
+                为匹配的元素集合中获取第一个元素的当前计算宽度值。给每个匹配的元素设置CSS宽度。
+            .innerHeight()
+                为匹配的元素集合中获取第一个元素的当前计算高度值,包括padding，但是不包括border。
+            .innerWidth()
+                为匹配的元素集合中获取第一个元素的当前计算宽度值,包括padding，但是不包括border。
+            .outerHeight()
+                获取元素集合中第一个元素的当前计算高度值,包括padding，border和选择性的margin。返回一个整数（不包含“px”）表示的值  ，或如果在一个空集合上调用该方法，则会返回 null。
+            .outerWidth()
+                获取元素集合中第一个元素的当前计算宽度值,包括padding，border和选择性的margin(.outerWidth()这里的参数如果为true，则包含margin,即.outerWidth(true))。（注：返回一个整数（不包含“px”）表示的值，或如果在一个空集合上调用该方法，则会返回 null。）
+        jQuery位置属性
+            位置主要有：offset(),position(),scrollTop()/scrollLeft();
+            1:offset()设置或者获取元素偏移
+                offset（）方法返回的是被选中元素相对于文档的偏移坐标，和父级元素没有关系
+            2：position()获取元素偏移
+                position（）方法用于返回被选元素相对于带有定位的父级的偏移坐标，如果父级没有定位，则以文档为准
+                position只能获取不能设置偏移
+            3.scrollTop()/scrollLeft()获取或者设置元素被卷曲的头部和左部
+                scrollTop()/scrollLeft()方法设置或者返回被选元素被卷曲的部分
+                //页面滚动事件
+                $(window).scroll(function(){
+                    console.log($(document).scrollTop());
+                })
+                在动画函数animate()里面有一个scrollTop属性，可以设置，实现带有动画的返回顶部效果。不能是文档做动画效果，而是html和body元素做动画效果，注意。
+                    $("body.html").animate(scrollTop:0);
+            页面抖动
+                当我们点击了小li，此时不需要执行页面滚动事件里的背景选择，添加current样式
+                解决方法：设置互斥锁（节流阀）
+jQuery事件
+    jQuery事件注册
+        单个事件注册
+            element.事件(function(){xxxx;})
+        事件处理on()绑定事件
+            on()方法在匹配元素上绑定多个事件处理函数
+            语法：elelmet.on(events,[selector],fn)
+            events一个或者多个事件类型，使用","分割。
+            [selector] 元素的子元素选择器
+            fn 回调函数
+            优势1：可以绑定多个事件，多个事件处理程序
+                $("div").on({
+                    mouseenter:function(){
+                        xxx;
+                    },
+                    click:function(){
+                        xxx;
+                    },
+                    mouseleave:function(){
+                        xxx;
+                    }
+                });
+                $("div").on("mouseenter","mouseleave",function(){
+                    $(this).toggleClass("sss");
+                })
+            优势2：可以实现事件委派（委托），把原来加载在子元素身上的事件绑定在父元素上，就是把事件委派给父元素
+            事件是绑定到ul身上，所以只有一个ul添加了点击事件，但是事件的触发是ul里的li，当我们点击了li由于事件冒泡，冒泡到父亲身上，就实现了点击效果。
+                $("ul").on("click","li",function(){
+                    xxxxx;
+                })
+            优势3：动态创建的元素，click没有办法为其绑定事件，on（）可以给动态创建的元素动态生成绑定事件
+                $("ul").on("click","li",function(){
+                    alert(11);
+                })
+                var li = $("<li>新创建的小li</li>");
+                $("ul").append(li);
+        事件解绑off();
+            $("div").off();//解绑div所有的事件
+            $("div").off("click");//解绑div的点击事件  
+            $("ul").off("click","li");//解绑ul里的事件委托  
+        如果有的事件只想触发一次，则可以使用one()来进行事件绑定。
+        自动触发事件trigger（）
+            有些事件我们想要他自动触发，比如自动轮播图。
+            $("div").on("click",function(){
+                xxxx;
+            })
+            1.元素.事件（）；
+                $("div").click();
+            2.元素.trigger("事件");
+                 $("div").trigger("click");
+            3.元素.triggerHandler("事件");//该方法不会触发元素的默认行为，比如表单一旦获取了焦点，就会有个光标在里面闪烁。这就是表单元素的默认行为。
+                 $("div").triggerHandler("click");
+    jQuery事件处理
+    jQuery事件对象
+        事件被触发，就会由事件对象产生
+        element.on(events,[selector],fn(event){}) 
+        这里的event就是事件对象
+        阻止默认行为：event.preventDefault()或者return false。
+        阻止冒泡：event.stopPropagation();
+jQuery其他方法导读
+    jQuery拷贝对象
+        如果想把某个对象拷贝（合并）给另一个对象使用，此时可以使用方法$.extend()
+        语法：$.extend([deep],target,object1,[objectN]);
+            1:deep 如果将deep参数设置为true为深拷贝，默认为false浅拷贝
+            2：target要拷贝的目标对象（受体）
+            3:object1待拷贝到的对象（源体）
+            4.[objectN]。。第n个拷贝源 
+            5:浅拷贝就是把被拷贝对象的复杂数据类型的地址复制给目标对象，修改目标对象会影响原来的对象。
+            6.深拷贝，前面加true，完全克隆（拷贝的是对象，不是地址），修改目标对象不会影响拷贝对象。拷贝的时候如果有不冲突的属性，他会将其合并在一起，冲突的属性会将其覆盖。
+            var targetobj={
+                id:3
+            };
+            var obj={
+                id:1
+                name:"andy"
+                maseg:{
+                    n:2
+                    nn:"sdd"
+                }
+            }
+            $.extend(targetobj,obj);
+            //如果tagetobj原本就有内容，则使用extend()会覆盖原来的数据
+
+    多库共存
+        jQuery使用$作为标识符，随着jQuery的流行，其他JS库也会使用$作为标识符，这样一起使用就会起冲突。
+        此时需要一个解决方案，让jQuery和其他库不冲突，可以同时存在，这就叫做多库共存
+        jQuery解决方案
+            1.统一将jQuery里的$改为jQuery。比如jQuery("div");
+            2.jQuery变量规定新的名称：$.noConflict() 
+                                    var xx=$.noConflict
+    jQuery插件
+        常用的jQuery插件库网站
+            jQuery之家：http://www.htmleaf.com/
+            jQuery插件库：https://www.jq22.com/
+

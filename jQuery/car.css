@@ -1,0 +1,369 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+.shortcut {
+    width: 100%;
+    height: 30px;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(11, 110, 134);
+}
+
+.shortcut a {
+    color: rgb(255, 255, 255);
+}
+
+.shortcut .w {
+    position: relative;
+    width: 100%;
+    line-height: 30px;
+}
+
+.shortcut .w .fl {
+    width: 200px;
+    position: absolute;
+    left: 20px;
+    /* float: left; */
+}
+
+.shortcut .w .fl ul {
+    display: flex;
+}
+
+.shortcut .w .fl ul li {
+    flex: 1;
+}
+
+.fl>ul>:first-child {
+    font-size: 13px !important;
+    font-weight: bold !important;
+}
+
+.fl>ul>:last-child>:last-child {
+    color: rgb(0, 247, 255);
+}
+
+.shortcut .w .fr {
+    width: 800px;
+    position: absolute;
+    left: 720px;
+}
+
+.shortcut .w .fr ul {
+    /* display: flex; */
+    position: relative;
+    /* float: right; */
+}
+
+.shortcut .w .fr li {
+    /* flex:1; */
+    width: 110px;
+    float: right;
+    text-align: center;
+}
+
+.car-header {
+    height: 100px;
+    width: 1200px;
+    /* background-color: rgb(255, 255, 255); */
+    margin: 0 auto;
+    position: relative;
+}
+
+.car-header .w {
+    position: relative;
+}
+
+.car-header .w .car-logo {
+    left: 0;
+    top: 0;
+    position: absolute;
+    /* float: left; */
+    width: 210px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.car-header .w .car-logo img {
+    position: absolute;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+}
+
+.car-header .w .car-logo b {
+    position: absolute;
+    left: 100px;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.c-container {
+    width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.cart-fiteer-bar {
+    font-size: 14px;
+    font-weight: bolder;
+    color: rgb(214, 0, 0);
+    width: 60px;
+    border-bottom: 2px solid rgb(214, 0, 0);
+}
+
+.cart-warp {
+    width: 1200px;
+}
+
+.cart-thead {
+    color: rgb(255, 255, 255);
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    position: relative;
+    width: 1200px;
+    float: left;
+    background-color: rgb(99, 99, 99);
+    font-size: 12px;
+}
+
+.t-checkedbox {
+    position: relative;
+    float: left;
+    width: 100px;
+}
+
+.t-checkedbox input {
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-bottom: -2px;
+}
+
+.t-goods {
+    position: relative;
+    float: left;
+    width: 600px;
+}
+
+.t-price {
+    position: relative;
+    float: left;
+    width: 100px;
+}
+
+.t-num {
+    position: relative;
+    float: left;
+    width: 200px;
+}
+
+.t-allnum {
+    position: relative;
+    float: left;
+    width: 100px;
+}
+
+.t-oprea {
+    position: relative;
+    float: left;
+    width: 100px;
+}
+
+.cart-item-list {
+    overflow: hidden;
+    position: relative;
+    width: 1200px;
+}
+
+.cart-item {
+    margin: 10px 0;
+    font-size: 12px;
+    position: relative;
+    width: 1200px;
+    height: 250px;
+    text-align: center;
+    border-top: 1px solid rgb(104, 104, 104);
+}
+
+.p-checkbox {
+    top: 100px;
+    position: relative;
+    width: 100px;
+    float: left;
+}
+
+.p-checkbox input {
+    zoom: 120%;
+}
+
+.p-goods {
+    width: 600px;
+    float: left;
+    position: relative;
+}
+
+.p-img {
+    position: relative;
+    height: 160px;
+    width: 220px;
+    float: left;
+    box-shadow: 1px 1px 5px rgb(104, 104, 104);
+    padding: 10px;
+    margin-top: 35px;
+}
+
+.p-msg {
+    margin-top: 35px;
+    position: relative;
+    float: left;
+    top: 70px;
+    width: 250px;
+}
+
+.p-img img {
+    height: 160px;
+    width: auto;
+}
+
+.p-price {
+    margin-top: 117px;
+    position: relative;
+    width: 100px;
+    float: left;
+}
+
+.p-num {
+    margin-top: 117px;
+    position: relative;
+    width: 200px;
+    float: left;
+}
+
+.p-num input {
+    text-align: center;
+    width: 50px;
+    outline: none;
+    border: 0;
+    border-left: 1px solid rgb(104, 104, 104);
+    border-right: 1px solid rgb(104, 104, 104);
+}
+
+.p-num a {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.quantity-from {
+    margin-left: 60px;
+    width: 90px;
+    font-size: 12px;
+    border: 1px solid rgba(104, 104, 104, 0.5);
+    background-color: white;
+}
+
+.all-price {
+    margin-top: 117px;
+    position: relative;
+    width: 100px;
+    float: left;
+}
+
+.opr {
+    margin-top: 117px;
+    position: relative;
+    width: 100px;
+    float: left;
+}
+
+.check-cart-item {
+    background-color: rgba(87, 87, 87, 0.1);
+    box-shadow: 1px 1px 5px rgb(104, 104, 104);
+}
+
+.cart-footer {
+    margin: 10px 0;
+    width: 1200px;
+    height: 30px;
+    background-color: rgba(114, 114, 114, 0.2);
+    font-size: 12px;
+    position: relative;
+    text-align: center;
+    border-top: 1px solid rgb(201, 201, 201);
+}
+
+.select-all {
+    line-height: 30px;
+    width: 100px;
+    float: left;
+}
+
+.select-all input {
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-bottom: 1px;
+}
+
+.opreation {
+    line-height: 30px;
+    width: 300px;
+    float: left;
+}
+
+.opreation a {
+    margin: 0 10px;
+}
+
+.toolbar-right {
+    line-height: 30px;
+    width: 400px;
+    float: right;
+    position: relative;
+}
+
+.amount-sum {
+    line-height: 30px;
+    width: 150px;
+    float: left;
+}
+
+.price-sum {
+    line-height: 30px;
+    width: 150px;
+    float: left;
+}
+
+.btn-area {
+    font-weight: bold;
+    color: aliceblue;
+    background-color: rgb(197, 0, 0);
+    line-height: 30px;
+    width: 90px;
+    float: right;
+    cursor: pointer;
+}
+
+.amount-sum em {
+    color: rgb(218, 0, 0);
+    font-weight: bold;
+}
+
+.price-sum em {
+    color: rgb(224, 0, 0);
+    font-weight: bold;
+}

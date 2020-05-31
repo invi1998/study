@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/jQuery/jQuery.mini.js"></script>
+    <script src="/jQuery/dt.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .cebianlan-box {
+            width: 50px;
+            position: absolute;
+            left: 95%;
+            top: 300px;
+            z-index: 1000;
+        }
+
+        .lan {
+            font-family: 'Microsoft Yahei';
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            color: aliceblue;
+            font-size: 12px;
+            padding: 7px;
+            line-height: 20px;
+            background-color: rgb(247, 107, 142);
+            margin: 10px 0;
+            word-wrap: break-word;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(247, 107, 142, 0.527);
+        }
+
+        .lan:hover {
+            animation: change-color 0.1s linear;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes change-color {
+            from {
+                box-shadow: 2px 2px 10px rgba(247, 107, 142, 0.527);
+            }
+
+            to {
+                box-shadow: 2px 2px 15px rgba(230, 37, 69, 0.788);
+                width: 41px;
+                height: 41px;
+            }
+        }
+
+        #go-top {
+            display: none;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #go-top>img {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            margin: 10px;
+            border-left: 50px transparent solid;
+            -webkit-filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+            filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+        }
+
+        #kefu {
+            display: none;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #kefu>img {
+            width: 30px;
+            height: 30px;
+            margin: 5px 5px;
+            border-left: 50px transparent solid;
+            -webkit-filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+            filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+        }
+
+        #old {
+            background-color: white;
+            color: rgb(31, 31, 31);
+        }
+
+        #mini {
+            display: none;
+            letter-spacing: 0;
+        }
+
+        .main-box {
+            font-size: 50px;
+            text-align: center;
+            color: rgba(233, 61, 84, 0.521);
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background-color: rgb(243, 231, 231);
+            z-index: 0;
+            margin: 20px 0;
+        }
+
+        #header-box {
+            height: 100px;
+            background-color: rgb(244, 245, 225);
+        }
+
+        #play-box {
+            height: 600px;
+            background-color: rgb(243, 231, 231);
+        }
+
+        #speack-box {
+            height: 700px;
+            background-color: rgb(233, 243, 231);
+        }
+
+        #mini-box {
+            height: 1400px;
+            background-color: rgb(231, 243, 242);
+        }
+
+        #footer-box {
+            height: 800px;
+            background-color: rgb(243, 231, 231);
+        }
+
+        .cebianlan-box-l {
+            width: 50px;
+            position: fixed;
+            /* position: static; */
+            left: 1%;
+            top: 161px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .lan-l {
+            font-family: 'Microsoft Yahei';
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            color: aliceblue;
+            font-size: 12px;
+            padding: 7px;
+            line-height: 20px;
+            background-color: rgb(247, 107, 142);
+            margin: 10px 0;
+            word-wrap: break-word;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(247, 107, 142, 0.527);
+        }
+
+        .lan-l:hover {
+            animation: change-color 0.1s linear;
+            animation-fill-mode: forwards;
+        }
+
+        #go-top-l {
+            /* display: none; */
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #go-top-l>img {
+            position: relative;
+            width: 20px;
+            height: 20px;
+            margin: 10px;
+            border-left: 50px transparent solid;
+            -webkit-filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+            filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+        }
+
+        #kefu-l {
+            /* display: none; */
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #kefu-l>img {
+            width: 30px;
+            height: 30px;
+            margin: 5px 5px;
+            border-left: 50px transparent solid;
+            -webkit-filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+            filter: drop-shadow(rgb(255, 255, 255) -50px 0);
+        }
+
+        #old-l {
+            background-color: white;
+            color: rgb(31, 31, 31);
+        }
+
+        #mini-l {
+            /* display: none; */
+            letter-spacing: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cebianlan-box-l">
+        <div class="lan-l" id="fankui-box-l">试用反馈</div>
+        <div class="lan-l" id="old-l">返回旧版</div>
+        <div class="lan-l" id="go-top-l">
+            <img src="/png/箭头上.png" alt="top">
+        </div>
+        <div class="lan-l" id="mini-l">
+            <p id="mini-l">mini</p>
+            <P id="off-l">OFF</P>
+        </div>
+        <div class="lan-l" id="kefu-l">
+            <img src="/png/客服.png" alt="kefu">
+        </div>
+    </div>
+    <div class="cebianlan-box">
+        <div class="lan" id="fankui-box">试用反馈</div>
+        <div class="lan" id="old">返回旧版</div>
+        <div class="lan" id="go-top">
+            <img src="/png/箭头上.png" alt="top">
+        </div>
+        <div class="lan" id="mini">
+            <p id="mini">mini</p>
+            <P id="off">OFF</P>
+        </div>
+        <div class="lan" id="kefu">
+            <img src="/png/客服.png" alt="kefu">
+        </div>
+    </div>
+
+    <div class="main-box" id="header-box">试用反馈</div>
+    <div class="main-box" id="play-box">返回旧版</div>
+    <div class="main-box" id="speack-box">内容区1</div>
+    <div class="main-box" id="mini-box">迷你板块</div>
+    <div class="main-box" id="footer-box">联系客服</div>
+    <!-- 电梯导航用 -->
+    <script>
+        var sliderBar = document.querySelector('.cebianlan-box');
+        var play = document.querySelector('#play-box');
+        var speack = document.querySelector('#speack-box');
+        var mini = document.querySelector('#mini-box');
+        var kefu = document.querySelector('#footer-box');
+
+        var gobackbar = document.querySelector('#go-top');
+        var minibar = document.querySelector('#mini');
+        var kefubar = document.querySelector('#kefu');
+
+        var playTop = play.offsetTop;
+        var sliderBarTop = sliderBar.offsetTop - playTop;
+        var speackTop = speack.offsetTop;
+        var miniTop = mini.offsetTop;
+        var kefuTop = kefu.offsetTop;
+        document.addEventListener('scroll', function () {
+            var sliderBarTopTop = sliderBar.style.top;
+            //页面被卷曲的头部window.pageYOffset
+            if (window.pageYOffset >= playTop) {
+                sliderBar.style.position = 'fixed';
+                sliderBar.style.top = sliderBarTop + 'px';
+            }
+            else {
+                sliderBar.style.position = 'absolute';
+                sliderBar.style.top = 300 + 'px';
+            }
+            if (window.pageYOffset >= speackTop) {
+                gobackbar.style.display = 'block';
+            }
+            else {
+                gobackbar.style.display = 'none';
+            }
+            if (window.pageYOffset >= miniTop) {
+                minibar.style.display = 'block';
+            }
+            else {
+                minibar.style.display = 'none';
+            }
+            if (window.pageYOffset >= kefuTop) {
+                kefubar.style.display = 'block';
+            }
+            else {
+                kefubar.style.display = 'none';
+            }
+        })
+        gobackbar.addEventListener('click', function () {
+            //window.scroll(0,0);//返回顶部，里面的值不跟单位，直接写数值
+            animate(window, 0);
+        });
+        function animate(obj, target, callback) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var step = (target - window.pageYOffset) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                if (window.pageYOffset == target) {
+                    //等于移动距离，停止定时器
+                    clearInterval(obj.timer);
+                    // if(callback)//判断是否添加回调函数，有就调用。
+                    // {
+                    //     callback();
+                    // }
+                    callback && callback();//和上面的写法不同，但是意思一样，效果一样
+                }
+                window.scroll(0, window.pageYOffset + step);
+            }, 10);
+        }
+    </script>
+</body>
+
+</html>

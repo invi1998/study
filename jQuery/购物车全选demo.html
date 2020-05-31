@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 引入页面元素图标 -->
+
+    <!-- 引入css -->
+    <link rel="stylesheet" href="/jQuery/car.css">
+    <!-- 引入jQuery文件 -->
+    <script src="/jQuery/jQuery.mini.js"></script>
+    <!-- 引入js文件 -->
+    <script src="/jQuery/car.js"></script>
+</head>
+
+<body>
+    <!-- 顶部导航 -->
+    <div class="shortcut">
+        <div class="w">
+            <div class="fl">
+                <ul>
+                    <li>不知名欢迎你！</li>
+                    <li>
+                        <a href="#">请登录</a>
+                        <span>|</span>
+                        <a href="#" class="style-red">免费注册</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="fr">
+                <ul>
+                    <li><a href="#">我的订单</a></li>
+                    <li class="spacer"></li>
+                    <li>
+                        <a href="#">我的信息</a>
+                        <i></i>
+                    </li>
+                    <li class="spacer"></li>
+                    <li>
+                        <a href="#">会员</a>
+                        <i></i>
+                    </li>
+                    <li class="spacer"></li>
+                    <li>
+                        <a href="#">企业采购</a>
+                        <i></i>
+                    </li>
+                    <li class="spacer"></li>
+                    <li>
+                        <a href="#">关注我们</a>
+                        <i></i>
+                    </li>
+                    <li class="spacer"></li>
+                    <li>
+                        <a href="#">售后服务</a>
+                        <i></i>
+                    </li>
+                    <li class="spacer"></li>
+                    <li>
+                        <a href="#">网站导航</a>
+                        <i></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 顶部导航结束 -->
+
+    <div class="car-header">
+        <div class="w">
+            <div class="car-logo">
+                <img src="/png/logo2.png" alt=""><b>购物车</b>
+            </div>
+        </div>
+    </div>
+
+    <div class="c-container">
+        <div class="w">
+            <div class="cart-fiteer-bar">
+                <em>全部商品</em>
+            </div>
+            <!-- 购物车核心区域 -->
+            <div class="cart-warp">
+                <!-- 头部全选模块 -->
+                <div class="cart-thead">
+                    <div class="t-checkedbox">
+                        <input type="checkbox" name="" id="" class="checkall">全选
+                    </div>
+                    <div class="t-goods">商品</div>
+                    <div class="t-price">单价</div>
+                    <div class="t-num">数量</div>
+                    <div class="t-allnum">小计</div>
+                    <div class="t-oprea">操作</div>
+                </div>
+                <!-- 商品详细模块 -->
+                <div class="cart-item-list">
+                    <div class="cart-item">
+                        <div class="p-checkbox">
+                            <input type="checkbox" name="" id="" class="j-checkbox">
+                        </div>
+                        <div class="p-goods">
+                            <div class="p-img">
+                                <img src="/png/（最终完成）潘多拉重置.jpg" alt="">
+                            </div>
+                            <div class="p-msg">【5幅26.3元】与魔灵签署契约从而掌握大量黑暗知识，并拥有强大的暗影力量。她就是暗影神庙的护法者，暗影术师潘多拉！</div>
+                        </div>
+                        <div class="p-price">￥1.68</div>
+                        <div class="p-num">
+                            <div class="quantity-from">
+                                <a href="javascript:;" class="decrement">-</a>
+                                <input type="text" class="itxt" value="1">
+                                <a href="javascript:;" class="increment">+</a>
+                            </div>
+                        </div>
+                        <div class="all-price">￥1.68</div>
+                        <div class="opr"><a href="javascript:;">删除</a></div>
+                    </div>
+                </div>
+                <div class="cart-item">
+                    <div class="p-checkbox">
+                        <input type="checkbox" name="" id="" class="j-checkbox">
+                    </div>
+                    <div class="p-goods">
+                        <div class="p-img">
+                            <img src="/png/（最终完成）阿道夫乐队.jpg" alt="">
+                        </div>
+                        <div class="p-msg">【3幅45.3元】号称拥有不屈之心的男人，最喜欢与对手战斗，没有任何阻挠他的人可以得以幸免！</div>
+                    </div>
+                    <div class="p-price">￥5.68</div>
+                    <div class="p-num">
+                        <div class="quantity-from">
+                            <a href="javascript:;" class="decrement">-</a>
+                            <input type="text" class="itxt" value="1">
+                            <a href="javascript:;" class="increment">+</a>
+                        </div>
+                    </div>
+                    <div class="all-price">￥5.68</div>
+                    <div class="opr"><a href="javascript:;">删除</a></div>
+                </div>
+                <div class="cart-item">
+                    <div class="p-checkbox">
+                        <input type="checkbox" name="" id="" class="j-checkbox">
+                    </div>
+                    <div class="p-goods">
+                        <div class="p-img">
+                            <img src="/png/（最终完成）九尾王者皮肤.jpg" alt="">
+                        </div>
+                        <div class="p-msg">【6幅34.3元】泰瑞帝国北疆马戏团团长之女，最优秀的舞者，在远古魔法召唤阵中觉醒。当你迷失在她曼妙的舞姿下时，你的性命将不再属于你！</div>
+                    </div>
+                    <div class="p-price">￥3.41</div>
+                    <div class="p-num">
+                        <div class="quantity-from">
+                            <a href="javascript:;" class="decrement">-</a>
+                            <input type="text" class="itxt" value="1">
+                            <a href="javascript:;" class="increment">+</a>
+                        </div>
+                    </div>
+                    <div class="all-price">￥3.41</div>
+                    <div class="opr"><a href="javascript:;">删除</a></div>
+                </div>
+                <div class="cart-item">
+                    <div class="p-checkbox">
+                        <input type="checkbox" name="" id="" class="j-checkbox">
+                    </div>
+                    <div class="p-goods">
+                        <div class="p-img">
+                            <img src="/png/（最终完成）thinkpad小黑.jpg" alt="">
+                        </div>
+                        <div class="p-msg">【6幅156.3元】雅城为了追赶阿波罗帝国机械战士计划而研发出来的机器人，成为新的雅城仲裁者（吉祥物），被犯罪者们畏惧的称为——黑甲仲裁。</div>
+                    </div>
+                    <div class="p-price">￥18.28</div>
+                    <div class="p-num">
+                        <div class="quantity-from">
+                            <a href="javascript:;" class="decrement">-</a>
+                            <input type="text" class="itxt" value="1">
+                            <a href="javascript:;" class="increment">+</a>
+                        </div>
+                    </div>
+                    <div class="all-price">￥18.28</div>
+                    <div class="opr"><a href="javascript:;">删除</a></div>
+                </div>
+                <div class="cart-item">
+                    <div class="p-checkbox">
+                        <input type="checkbox" name="" id="" class="j-checkbox">
+                    </div>
+                    <div class="p-goods">
+                        <div class="p-img">
+                            <img src="/png/（最终完成）盖亚（夏日）0.jpg" alt="">
+                        </div>
+                        <div class="p-msg">【4幅135元】阿波罗帝国绝对的主战派，崇尚武力，钟爱亲自参与战斗的帝国军部高层，对战斗极度渴望！</div>
+                    </div>
+                    <div class="p-price">￥31.68</div>
+                    <div class="p-num">
+                        <div class="quantity-from">
+                            <a href="javascript:;" class="decrement">-</a>
+                            <input type="text" class="itxt" value="1">
+                            <a href="javascript:;" class="increment">+</a>
+                        </div>
+                    </div>
+                    <div class="all-price">￥31.68</div>
+                    <div class="opr"><a href="javascript:;">删除</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- 商品结算模块 -->
+        <div class="cart-footer">
+            <div class="select-all">
+                <input type="checkbox" name="" id="" class="checkall">全选
+            </div>
+            <div class="opreation">
+                <a href="javascript:;" class="remove-batch">删除选中的商品</a>
+                <a href="javascript:;" class="clear-all">清理购物车</a>
+            </div>
+            <div class="toolbar-right">
+                <div class="amount-sum">已选中 <em>1</em> 件商品</div>
+                <div class="price-sum">总价：<em>￥1.68</em></div>
+                <div class="btn-area">去结算</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

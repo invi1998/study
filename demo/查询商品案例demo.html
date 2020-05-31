@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .search {
+            margin: 100px auto;
+            margin-bottom: 30px;
+            width: 600px;
+            height: 30px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        input {
+            font-size: 12px;
+            line-height: 12px;
+            width: 50px;
+        }
+
+        button {
+            width: 40px;
+            height: 20px;
+            font-size: 12px;
+            margin: 0 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            position: relative;
+            width: 600px;
+            height: auto;
+            font-size: 12px;
+            margin: 5px auto;
+        }
+
+        thead {
+            color: rgb(255, 255, 255);
+            background-color: rgb(70, 70, 70);
+            text-align: center;
+            font-size: 14px;
+            height: 50px;
+        }
+
+        thead tr {
+            height: 50px;
+            line-height: 60x;
+        }
+
+        tbody tr {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.322);
+        }
+
+        tbody tr:hover {
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        按照价格查询：<input type="text" class="start"> - <input type="text" class="end">
+        <button class="search-price">搜索</button>按照商品名查询：<input class="product" type="text"><button
+            class="search-pro">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        //利用新增数组的方式来操作数据
+        var date = [
+            {
+                id: 1,
+                pname: '小米6',
+                price: 2400
+            }, {
+                id: 2,
+                pname: 'iphone6',
+                price: 5000
+            }, {
+                id: 3,
+                pname: '魅族11s',
+                price: 2500
+            }, {
+                id: 4,
+                pname: '三星Glex9',
+                price: 4000
+            }, {
+                id: 5,
+                pname: '华为p30',
+                price: 4300
+            }, {
+                id: 6,
+                pname: '红米6',
+                price: 666
+            }, {
+                id: 7,
+                pname: '华为Mate30',
+                price: 5000
+            }, {
+                id: 8,
+                pname: '一加7plus',
+                price: 3000
+            }
+        ];
+        var tbody = document.querySelector('tbody');
+        var start = document.querySelector('.start');
+        var end = document.querySelector('.end');
+        var price_search = document.querySelector('.search-price');
+        var product=document.querySelector('.product');
+        var searchpro=document.querySelector('.search-pro');
+        setDate(date);
+        function setDate(mydate) {
+            //先清空页面数据
+            tbody.innerHTML = '';
+            mydate.forEach(function (value) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + value.id + '</td><td>' + value.pname + '</td><td>' + value.price + '</td>';
+                tbody.appendChild(tr);
+            })
+        }
+        price_search.addEventListener('click', function () {
+            var newdate = date.filter(function (pvalue) {
+                return (pvalue.price >= start.value && pvalue.price <= end.value);
+            })
+            setDate(newdate);
+        })
+        searchpro.addEventListener('click',function(){
+            var arr=[];
+            date.some(function(value){
+                if(value.pname===product.value){
+                    arr.push(value);
+                    return true;
+                }
+            });
+            setDate(arr);
+        })
+    </script>
+</body>
+
+</html>

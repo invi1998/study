@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            margin: 100px auto;
+            color: aliceblue;
+           width: 350px;
+           height: 400px;
+           background-color: rgb(0, 83, 56); 
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var box=document.querySelector('.box');
+        box.addEventListener('mousemove',function(e){
+            console.log(e.pageX);
+            console.log(e.pageY);
+            console.log(box.offsetLeft);
+            var x=e.pageX-this.offsetLeft;
+            var y=e.pageY-this.offsetTop;
+            this.innerHTML='鼠标在盒子里X坐标等于：'+x+'     Y坐标扥等于：'+y;
+        })
+    </script>
+</body>
+</html>

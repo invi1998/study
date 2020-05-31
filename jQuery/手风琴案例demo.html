@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        .king {
+            position: relative;
+            margin: 100px auto;
+            width: 852px;
+            height: 80px;
+            background-color: rgb(0, 48, 87);
+            overflow: hidden;
+        }
+
+        .king ul{
+            overflow: hidden;
+        }
+
+        .king li {
+            float: left;
+            width: 69px;
+            height: 69px;
+            margin: 6px 5px;
+            position: relative;
+        }
+
+        .king li.current {
+            width: 224px;
+        }
+
+        .king li.current .small {
+            display: none;
+        }
+
+        .king li.current .big {
+            display: block;
+        }
+
+        .big {
+            width: 224px;
+            display: none;
+        }
+
+        .small {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 69px;
+            height: 69px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="/jQuery/jQuery.mini.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //鼠标经过某个小Li 
+            $(".king li").mouseenter(function(){
+                //当前小li 宽度变为224px 同时小图片淡出 大图淡入
+                $(this).stop().animate({
+                    width:224
+                }).find(".small").stop().fadeOut().siblings(".big").stop().fadeIn();
+                //其余兄弟li宽度变为69px 小图淡入大图淡出
+                $(this).siblings("li").stop().animate({
+                    width:69
+                }).find(".small").stop().fadeIn().siblings(".big").stop().fadeOut();
+            })
+            
+            
+        });
+    </script>
+    <div class="king">
+        <ul>
+            <li class="current">
+                <a href="#">
+                    <img src="../png/大乔s.jpg" alt="" class="small">
+                    <img src="../png/大乔b.png" alt="" class="big">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../png/曹操s.jpg" alt="" class="small">
+                    <img src="../png/曹操b.png" alt="" class="big">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../png/廉颇s.jpg" alt="" class="small">
+                    <img src="../png/廉颇b.png" alt="" class="big">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../png/甄姬s.jpg" alt="" class="small">
+                    <img src="../png/甄姬b.png" alt="" class="big">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../png/荆轲s.jpg" alt="" class="small">
+                    <img src="../png/荆轲b.png" alt="" class="big">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../png/黄忠s.jpg" alt="" class="small">
+                    <img src="../png/黄忠b.png" alt="" class="big">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="../png/干将s.jpg" alt="" class="small">
+                    <img src="../png/干将b.png" alt="" class="big">
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

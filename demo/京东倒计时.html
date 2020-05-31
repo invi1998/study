@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: relative;
+            width: 250px;
+            height: 350px;
+            margin: 100px auto;
+            text-align: center;
+            background-color: rgb(223, 30, 30);
+        }
+        .JD{
+            color: aliceblue;
+            height: 200px;
+            padding-top: 70px;
+            padding-bottom: 10px;
+        }
+        .miaosa_text{
+            font-family: "SimHei", Times, serif;
+            font-size: 45px;
+            color:rgb(255, 255, 255);
+        }
+        .light_text{
+            font-family: "Microsoft Yahei",times, serif;
+            font-size: 15px;
+            font-weight: lighter;
+            color: rgba(255, 255, 255, 0.6);
+            padding:10px 0;
+        }
+        .tishi{
+            font-family: "Microsoft Yahei",times, serif;
+            font-size: 14px;
+            font-weight:bolder;
+            color: rgba(255, 255, 255,0.8);
+            padding:10px 0;
+            letter-spacing:0.2em;
+        }
+        .jishi>span{
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+            font-size: 15px;
+            margin: 0 5px;
+            color: rgb(255, 255, 255);
+            background-color: rgb(31, 31, 31);
+        }
+        .box2{
+            margin: 10px auto;
+            width: 300px;
+            text-align: center;
+            font-size: 12px;
+        }
+        input{
+            font-size: 12px;
+        }
+        button{
+            font-size: 12px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="box2">
+        <span>
+            <input type="text" placeholder="请输入手机号码：">
+        </span>
+        <span><button>点击获取验证码</button></span>   
+    </div>
+    <div class="box">
+        <div class="JD">
+            <p class="miaosa_text">京东秒杀</p>
+            <p class="light_text">FLASH DETALS</p>
+            <img src="/png/闪电.png" alt="闪电">
+            <p class="tishi">距离本次秒杀结束还剩</p>
+        </div>
+        <div class="jishi">
+            <span class="hour"></span>
+            <span class="minute"></span>
+            <span class="second"></span>
+        </span>
+    </div>
+    <script>
+        var hour=document.querySelector('.hour');
+        var minute=document.querySelector('.minute');
+        var second=document.querySelector('.second');
+        var inpute_time= +new Date('2019-12-1 20:45:02'); //返回的是用户输入时间的总毫秒数
+        caculateTime();
+        setInterval(caculateTime,1000);
+        function caculateTime(){
+            var now_time=+new Date();    //  返回的是当前时间总的毫秒数
+            var times=(inpute_time-now_time)/1000; //剩余时间的总秒数
+            var h =parseInt(times/60/60%24);    // 时
+            h=h<10?'0'+h:h;
+            hour.innerHTML=h;
+            var m=parseInt(times/60%60);    //  分
+            m=m<10?'0'+m:m;
+            minute.innerHTML=m;
+            var s=parseInt(times%60);   //秒
+            s=s<10?'0'+s:s;
+            second.innerHTML=s;
+        }
+        var button=document.querySelector('button');
+        var time=10;
+        button.addEventListener('click',function(){
+            button.disabled=true;
+            var timer=setInterval(function(){
+                if(time==0){
+                    clearInterval(timer);
+                    button.disabled=false;
+                    button.innerHTML='点击获取验证码';
+                    time=10;
+                }
+                else{
+                    button.innerHTML='请在'+time+'秒后重新获取';
+                    time--;
+                }
+            },1000);
+        })
+    </script>
+</body>
+</html>

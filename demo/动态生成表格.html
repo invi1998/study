@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            margin: 100px auto;
+            text-align: center;
+            width: 500px;
+            background-color: rgb(248, 244, 238);
+        }
+        table{
+            width: 500px;
+        }
+        table td{
+            font-size: 12px;
+            height: 30px;
+        }
+        table thead{
+            color: aliceblue;
+            height: 50px;
+            line-height: 50px;
+            background-color: rgb(138, 70, 70);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>科目</th>
+                    <th>成绩</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var dates=[
+        {
+            name: '法维安',
+            subject:'css',
+            score:98,
+        },{
+            name: '哈辛达',
+            subject:'css',
+            score:95,
+        },{
+            name: '帕奇',
+            subject:'css',
+            score:68,
+        },{
+            name: '菲奥那',
+            subject:'css',
+            score:92,
+        },{
+            name: '巴尔三世',
+            subject:'css',
+            score:78,
+        },{
+            name: '希蒂',
+            subject:'css',
+            score:88,
+        },{
+            name: '撒卡',
+            subject:'css',
+            score:65,
+        },{
+            name: '格伦魔里',
+            subject:'css',
+            score:86,
+        }];
+        //创建行
+        var tbody=document.querySelector('tbody');
+        for(var i=0;i<dates.length;i++){
+            var tr=document.createElement('tr');
+            tbody.appendChild(tr);
+            //往行里创建单元格
+            //遍历dates里的每个对象里的数据
+            /*
+                for(var s in obj){
+                    s得到的是属性名
+                    obj[s]得到的是属性值
+                }
+            */
+            for(var s in dates[i]){
+                var td=document.createElement('td');
+                td.innerHTML=dates[i][s];
+                tr.appendChild(td);
+
+            }
+            var tdd=document.createElement('td');
+            tdd.innerHTML='<a href="javascript:;">删除</a>';
+            tr.appendChild(tdd);
+        }
+        var sc=document.querySelectorAll('a');
+        for(var i=0;i<sc.length;i++){
+            sc[i].onclick=function(){
+                tbody.removeChild(this.parentNode.parentNode);
+            }
+        }
+    </script>
+</body>
+</html>
